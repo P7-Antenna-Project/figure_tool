@@ -35,7 +35,7 @@ jobs:
           export TEMP_DIR=$(mktemp -d)
 
           cd "$TEMP_DIR"
-          git clone --single-branch --depth 1 --branch master https://djohan20%40aau.student.dk:djohan20@git.overleaf.com/6502c96681431d837d9e5b7b overleaf_project 
+          git clone --single-branch --depth 1 --branch master https://djohan20%40aau.student.dk:djohan20%40student.aau.dk@git.overleaf.com/6502c96681431d837d9e5b7b overleaf_project 
           cd overleaf_project
           
           rm -rf "$TEMP_DIR/overleaf_project/built_figures"
@@ -44,5 +44,5 @@ jobs:
           git add built_figures/
           git commit -m "Add built figures"
 
-          git push https://djohan20@aau.student.dk:djohan20%40git.overleaf.com/6502c96681431d837d9e5b7b -u master
+          git push https://djohan20%40aau.student.dk:djohan20%40student.aau.dk@git.overleaf.com/6502c96681431d837d9e5b7b -u master
 
