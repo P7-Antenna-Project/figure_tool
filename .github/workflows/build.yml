@@ -1,0 +1,48 @@
+name: "build figures"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3 # checkout the repository content
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+        
+
+      - name: install packages
+        run: pip install -r requirements.txt
+
+      - name: build figures
+        run: |
+          python build.py
+
+      - name: push figures
+        run: |
+          git config --global user.email gittoover@gmail.com
+          git config --global user.name gittoover@gmail.com
+
+          export INIT_DIR=$(pwd)
+          export TEMP_DIR=$(mktemp -d)
+
+          cd "$TEMP_DIR"
+          git clone --single-branch --depth 1 --branch master https://gittoover%40gmail.com:Git_T0_0ver@git.overleaf.com/63e0b77aeded48d871a05c10 overleaf_project
+          cd overleaf_project
+          
+          rm -rf "$TEMP_DIR/overleaf_project/built_figures"
+          cp -ra "$INIT_DIR/build" "$TEMP_DIR/overleaf_project/built_figures" 
+
+          git add built_figures/
+          git commit -m "Add built figures"
+
+          git push https://gittoover%40gmail.com:Git_T0_0ver@git.overleaf.com/63e0b77aeded48d871a05c10 -u master
+

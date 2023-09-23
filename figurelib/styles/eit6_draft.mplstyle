@@ -1,0 +1,3 @@
+lines.linewidth: 10
+path.simplify: True
+path.simplify_threshold: 1.0

@@ -1,0 +1,5 @@
+matplotlib==3.5.*
+termcolor==2.2.*
+scipy==1.9.*
+matplot_fmt_pi== 2.0.*
+jinja2==3.1.*
