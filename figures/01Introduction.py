@@ -4,7 +4,7 @@ import numpy as np
 
 # Some example data to display
 
-collection = FigureCollection("01_Introduction")
+collection = FigureCollection("Introduction1")
 
 
 @collection.table(header=["Col 1", "Col 2", "Col 3"], header_spec="l|l|l")
