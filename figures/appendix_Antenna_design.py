@@ -8,7 +8,7 @@ collection = FigureCollection("Antenna_design")
 
 @collection.plot_figure(only_build_this=False)
 def MIFA_s11():
-    data = np.loadtxt(r'Data\MIFA_s11_data.txt', delimiter='\t', skiprows=1, unpack=True)
+    data = np.loadtxt(r'C:\Users\nlyho\OneDrive - Aalborg Universitet\7. semester\Git\figure_tool\Data\MIFA_s11_data.txt', delimiter='\t', skiprows=1, unpack=True)
     fig, ax = plt.subplots()    
     ax.plot(data[0], data[1])    
     plt.xlabel('Frequency [MHz]')
