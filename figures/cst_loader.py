@@ -1,6 +1,15 @@
 import numpy as np
 
 def load_cst_file(data_file, runIds, coordinate_count):
+    """Returns a data file of the dimension [runids, measurepoints, coordinate count].
+    
+
+    Args:
+        data_file (string) file path of the cst txt file\n
+        runIds (int) amount of run ids in the data file\n
+        coordinate_count (int) the amount of axis\n
+    """
+    
     file_to_load = open(data_file, "r")
 
 
@@ -33,7 +42,10 @@ def load_cst_file(data_file, runIds, coordinate_count):
             im = x.split(f"\t")
             data[i][k] = [float(x) for x in im]
 
+
     return data
+
+
 
 if __name__ == "__main__":
     print(load_cst_file("data/2_9ghztest.txt", 1, 3).shape)
