@@ -1,5 +1,6 @@
 from figurelib.figure import FigureCollection
 import matplotlib.pyplot as plt
+import figures.cst_loader as c_load
 import numpy as np
 
 # Some example data to display
@@ -23,37 +24,9 @@ def SAR_test_dipole_S_param():
     fig, ax = plt.subplots(1, 1)
     runids = 6
 
-    file_to_load = open("Data/SAR_test_S_parameters.txt", "r")
+    file_to_load = "data/SAR_test_S_parameters.txt"
 
-
-    line_count = 0
-    file_to_load.readline()
-    file_to_load.readline()
-    file_to_load.readline()
-
-    flag_hashtag = False
-    while(flag_hashtag == False):
-        x = file_to_load.readline()
-        #print(x)
-        if x[0] == "#":
-            break
-        else:
-            line_count += 1
-    
-    #print(line_count)
-    file_to_load = open("Data/SAR_test_S_parameters.txt", "r")
-
-    data = np.zeros((runids, line_count, 2))
-
-    for i in range(runids):
-        file_to_load.readline()
-        file_to_load.readline()
-        file_to_load.readline()
-        for k in range(line_count):
-            x = file_to_load.readline()
-            im = x.split(f"\t")
-            data[i][k][0] = float(im[0])
-            data[i][k][1] = float(im[1])
+    data = c_load.load_cst_file(file_to_load, runids, 2)
     
     distance = ["d = 0 mm", "d = 3 mm","d = 30 mm","d = 50 mm","d = 80 mm","Ref"]
     for i in range(runids):
@@ -63,8 +36,8 @@ def SAR_test_dipole_S_param():
     plt.xlabel("Frequency [GHz]")
     plt.ylabel("S$_{1,1}$-Parameter [dB]")
     fig.legend()
+    
     return fig
-
 
 if __name__ == "__main__":
     import numpy as np

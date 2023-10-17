@@ -13,7 +13,6 @@ def load_cst_file(data_file, runIds, coordinate_count):
     while(flag_hashtag == False):
         
         x = file_to_load.readline()
-        print(x)
         if len(x) == 0:
             break
         elif x[0] == "#":
@@ -34,7 +33,6 @@ def load_cst_file(data_file, runIds, coordinate_count):
             im = x.split(f"\t")
             data[i][k] = [float(x) for x in im]
 
-    
     return data
 
 if __name__ == "__main__":
