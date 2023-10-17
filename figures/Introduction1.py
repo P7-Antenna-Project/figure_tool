@@ -21,7 +21,7 @@ def test_table():
 @collection.plot_figure()
 def SAR_test_dipole_S_param():
     fig, ax = plt.subplots(1, 1)
-    runids = 4
+    runids = 6
 
     file_to_load = open("Data/SAR_test_S_parameters.txt", "r")
 
@@ -55,7 +55,7 @@ def SAR_test_dipole_S_param():
             data[i][k][0] = float(im[0])
             data[i][k][1] = float(im[1])
     
-    distance = ["0 mm", "3 mm","10 mm","Ref"]
+    distance = ["0 mm", "3 mm","10 mm","30 mm","50 mm","Ref"]
     for i in range(runids):
         ax.plot(np.transpose(data[i])[0], np.transpose(data[i])[1], label=f"{distance[i]}")
 
