@@ -6,7 +6,7 @@ import pandas as pd
 
 collection = FigureCollection("Antenna_design")
 
-@collection.plot_figure(only_build_this=True)
+@collection.plot_figure(only_build_this=False)
 def MIFA_s11():
     data = np.loadtxt(r'Data\MIFA_s11_data.txt', delimiter='\t', skiprows=1, unpack=True)
     fig, ax = plt.subplots()    
