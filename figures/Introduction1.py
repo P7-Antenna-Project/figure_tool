@@ -55,7 +55,7 @@ def SAR_test_dipole_S_param():
             data[i][k][0] = float(im[0])
             data[i][k][1] = float(im[1])
     
-    distance = ["0 mm", "3 mm","10 mm","30 mm","50 mm","Ref"]
+    distance = ["d = 0 mm", "d = 3 mm","d = 30 mm","d = 50 mm","d = 80 mm","Ref"]
     for i in range(runids):
         ax.plot(np.transpose(data[i])[0], np.transpose(data[i])[1], label=f"{distance[i]}")
 
