@@ -1,6 +1,6 @@
 from figurelib.figure import FigureCollection
 import matplotlib.pyplot as plt
-import figures.cst_loader as c_load
+from figures.cst_loader import load_cst_filePOLAR, load_cst_file
 import numpy as np
 
 # Some example data to display
@@ -26,7 +26,7 @@ def SAR_test_dipole_S_param():
 
     file_to_load = "data/SAR_test_S_parameters.txt"
 
-    data = c_load.load_cst_file(file_to_load, runids, 2)
+    data = load_cst_file(file_to_load, runids, 2)
     
     distance = ["d = 0 mm", "d = 3 mm","d = 30 mm","d = 50 mm","d = 80 mm","Ref"]
     for i in range(runids):
@@ -38,6 +38,26 @@ def SAR_test_dipole_S_param():
     fig.legend()
     
     return fig
+
+# @collection.plot_figure(only_build_this=True)
+# def SAR_test_dipole_FFcuts():
+#     fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+#     runids = 4
+
+#     file_to_load = "data/SAR_test_dipole_FFcuts.txt"
+#     data = load_cst_filePOLAR(file_to_load,4,2)
+        
+#     distance = ["d = 0 mm", "d = 3 mm","d = 30 mm","Ref"]
+#     for i in range(runids):
+#         ax.plot(np.transpose(data[i])[1], np.transpose(data[i])[2], label=f"{distance[i]}")
+
+#     ax.grid()
+#     plt.xlabel(" [GHz]")
+#     plt.ylabel(" [dB]")
+#     fig.legend()
+#     plt.show()
+    
+#     return fig
 
 if __name__ == "__main__":
     import numpy as np
