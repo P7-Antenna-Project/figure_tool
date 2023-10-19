@@ -25,7 +25,7 @@ def SAR_test_dipole_S_param():
     fig, ax = plt.subplots(1, 1)
     runids = 6
 
-    file_to_load = "data/SAR_test_S_parameters.txt"
+    file_to_load = "Data/SAR_test_S_parameters.txt"
 
     data = load_cst_file(file_to_load, runids, 2)
     
@@ -47,7 +47,7 @@ def SAR_test_dipole_FFcuts():
     runids = 4
 
     # Load the files
-    file_to_load = "data/SAR_test_dipole_FFcuts.txt"
+    file_to_load = "Data/SAR_test_dipole_FFcuts.txt"
     data = load_cst_filePOLAR(file_to_load,runids,8)
 
     # Convert the degress to radians
