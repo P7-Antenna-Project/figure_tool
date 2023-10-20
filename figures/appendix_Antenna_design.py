@@ -37,7 +37,7 @@ def MIFA_sweep_s11():
     plt.xlabel("Frequency [MHz]")
     plt.ylabel("S$_{1,1}$-Parameter [dB]")
     fig.legend()
-    plt.show()
+    #plt.show()
     
     return fig
 

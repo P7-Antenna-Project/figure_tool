@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 from figures.cst_loader import load_cst_filePOLAR, load_cst_file
 import numpy as np
 
+from matplotlib.ticker import FuncFormatter
+
 # Some example data to display
 
 collection = FigureCollection("Introduction1")
@@ -60,6 +62,11 @@ def SAR_test_dipole_FFcuts():
     for i in range(runids):
         ax.plot(np.transpose(data[i])[1], np.transpose(data[i])[2], label=f"{distance[i]}")
 
+    rad2fmt = lambda x,pos : f"{np.rad2deg(x):.0f}$^{{\circ}}$"
+    ax.xaxis.set_major_formatter(FuncFormatter(rad2fmt))
+
+
+
     ax.set_rlabel_position(-22.5)
     ax.grid(True)
     fig.legend()
@@ -82,4 +89,4 @@ if __name__ == "__main__":
     ax.grid(True)
 
     ax.set_title("A line plot on a polar axis", va='bottom')
-    plt.show()
+    #plt.show()
