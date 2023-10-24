@@ -1,5 +1,5 @@
 # EIT7 Figure Tool
-[![build figures](https://github.com/EIT6-Beacon/figure_tool/actions/workflows/build.yml/badge.svg)](https://github.com/EIT6-Beacon/figure_tool/actions/workflows/build.yml)
+[![build figures](https://github.com/P7-Antenna-Project/figure_tool/actions/workflows/build.yml/badge.svg)](https://github.com/P7-Antenna-Project/figure_tool/actions/workflows/build.yml)
 
 This tools assists in creating consistent matplotlib figures with version-control. 
 
