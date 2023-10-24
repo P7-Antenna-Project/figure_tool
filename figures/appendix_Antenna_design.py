@@ -21,7 +21,7 @@ def MIFA_s11():
     return fig
 
 
-@collection.plot_figure(only_build_this=True)
+@collection.plot_figure(only_build_this=False)
 def circular_wire_antenna_s11():   
     with open(r'Data\appendix_circular_wire_antenna.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
         file_data = pickle.load(pkl_path)
