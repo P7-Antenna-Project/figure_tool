@@ -2,6 +2,7 @@ from figurelib.figure import FigureCollection
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import pickle
 
 
 collection = FigureCollection("Antenna_design")
@@ -12,7 +13,29 @@ def MIFA_s11():
     fig, ax = plt.subplots()    
     ax.plot(data[0], data[1])    
     plt.xlabel('Frequency [MHz]')
-    plt.ylabel('S11 [dB]')
-    plt.title('S11 of MIFA antenna')
+    plt.ylabel('S1,1 [dB]')
+    plt.title('S1,1 of MIFA antenna')
     plt.grid()
     return fig
+
+
+@collection.plot_figure(only_build_this=True)
+def circular_wire_antenna_s11():   
+    with open(r'Data\appendix_circular_wire_antenna.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
+        file_data = pickle.load(pkl_path)
+    fig, ax = plt.subplots()    
+    frequency = np.arange(500,3001,2.5)
+
+    #ax.plot(data[0], data[1])  
+    for i in range(0,199):
+        if (np.mod(i,20) == 0):
+            plt.plot(frequency,file_data['S1,1'][i],label=
+            f"diff = {file_data['Parameter combination'][i,0]}, thickness = {file_data['Parameter combination'][i,1]} , radius = {file_data['Parameter combination'][i,2]}")
+    plt.legend()
+    plt.xlabel('Frequency [MHz]')
+    plt.ylabel('S1,1 [dB]')
+    plt.title('S1,1 of Circular Wire Antenna')
+    plt.grid()
+    plt.show()
+    return fig 
+
