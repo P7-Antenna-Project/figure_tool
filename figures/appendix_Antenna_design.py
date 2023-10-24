@@ -3,11 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pickle
+from figures.cst_loader import load_cst_filePOLAR, load_cst_file
+
 
 
 collection = FigureCollection("Antenna_design")
 
-@collection.plot_figure(only_build_this=False)
+@collection.plot_figure()
 def MIFA_s11():
     data = np.loadtxt(open('Data/MIFA_s11_data.txt'), delimiter='\t', skiprows=1, unpack=True)
     fig, ax = plt.subplots()    
