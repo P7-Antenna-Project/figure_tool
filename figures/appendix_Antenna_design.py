@@ -28,11 +28,12 @@ def circular_wire_antenna_s11():
     fig, ax = plt.subplots()    
     frequency = np.arange(500,3001,2.5)
 
-    #ax.plot(data[0], data[1])  
-    for i in range(0,199):
-        if (np.mod(i,20) == 0):
+    #ax.plot(data[0], dat
+    # a[1])  
+    for i in range(0,200):
+        if (np.mod(i+1,16) == 0):
             plt.plot(frequency,file_data['S1,1'][i],label=
-            f"diff = {file_data['Parameter combination'][i,0]}, thickness = {file_data['Parameter combination'][i,1]} , radius = {file_data['Parameter combination'][i,2]}")
+            f"h = {abs(file_data['Parameter combination'][i,0])}, wr = {file_data['Parameter combination'][i,1]}") # , cr = {file_data['Parameter combination'][i,2]}
     plt.legend()
     plt.xlabel('Frequency [MHz]')
     plt.ylabel('S1,1 [dB]')
