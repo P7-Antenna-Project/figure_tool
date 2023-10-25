@@ -60,5 +60,29 @@ def IFA_for_appendix():
     plt.ylabel('S1,1 [dB]')
     plt.title('S1,1 of Circular Wire Antenna')
     plt.grid()
-    plt.show()
+    #plt.show()
+    return fig 
+
+
+@collection.plot_figure(only_build_this=False)
+def IFA_for_appendix():   
+    with open('Data/appendix_davidIFA.pkl', 'rb') as pkl2_path: #Dump the pickle file at the given file path
+        file_data = pickle.load(pkl2_path)
+    fig, ax = plt.subplots()    
+    frequency = np.arange(500,3001,2.5)
+
+    for i in range(0,30):
+        if (np.mod(i,6) == 0):
+            plt.plot(frequency,file_data['S1,1'][i],label=
+          # two variables:
+            f"H = {file_data['Parameter combination'][i,0]}, L = {25-(file_data['Parameter combination'][i,1])}")
+          # three variables:
+          #f"diff = {file_data['Parameter combination'][i,0]}| thickness = {file_data['Parameter combination'][i,1]} | radius = {file_data['Parameter combination'][i,2]}")
+
+    plt.legend()
+    plt.xlabel('Frequency [MHz]')
+    plt.ylabel('S1,1 [dB]')
+    plt.title('S1,1 of IFA')
+    plt.grid()
+    #plt.show()
     return fig 
