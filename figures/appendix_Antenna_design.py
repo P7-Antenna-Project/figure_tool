@@ -60,5 +60,22 @@ def IFA_for_appendix():
     plt.ylabel('S1,1 [dB]')
     plt.title('S1,1 of Circular Wire Antenna')
     plt.grid()
-    plt.show()
     return fig 
+
+@collection.plot_figure(only_build_this=False)
+def MIFA_for_appendix():   
+    with open('Data/MIFA_res.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
+        file_data = pickle.load(pkl_path)
+        
+    fig, ax = plt.subplots()    
+    frequency = np.arange(500,5001,4.5)
+    for i in range(len(file_data['Parameter combination'])):
+        plt.plot(frequency,file_data['S1,1'][i],label=f"L = {file_data['Parameter combination'][i]}")
+    
+    plt.legend()
+    plt.xlabel('Frequency [MHz]')
+    plt.ylabel('S1,1 [dB]')
+    plt.title('S1,1 of MIFA Antenna')
+    plt.grid()
+    
+    return fig
