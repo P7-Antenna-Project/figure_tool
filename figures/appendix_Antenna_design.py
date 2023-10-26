@@ -62,7 +62,7 @@ def IFA_for_appendix():
     plt.grid()
     return fig 
 
-@collection.plot_figure(only_build_this=False)
+@collection.plot_figure(only_build_this=True)
 def MIFA_for_appendix():   
     with open('Data/MIFA_res.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
         file_data = pickle.load(pkl_path)
@@ -77,5 +77,5 @@ def MIFA_for_appendix():
     plt.ylabel('S1,1 [dB]')
     plt.title('S1,1 of MIFA Antenna')
     plt.grid()
-    
+    plt.show()
     return fig
