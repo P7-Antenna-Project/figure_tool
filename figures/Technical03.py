@@ -15,9 +15,9 @@ collection = FigureCollection("03Technical")
 
 @collection.plot_figure(only_build_this=False)
 def mutualCouplingDegrading_sParams():   
-    with open('Data\data_s11_unpolar.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
+    with open('Data/data_s11_unpolar.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
         file_data11 = pickle.load(pkl_path)
-    with open('Data\data_s21_unpolar.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
+    with open('Data/data_s21_unpolar.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
         file_data21 = pickle.load(pkl_path)
     fig, ax = plt.subplots()
     frequency = np.arange(500, 3001, 2.5)    
@@ -50,7 +50,7 @@ def mutualCouplingDegrading_sParams():
         file.readline()  # Skip the second line
         file.readline()  # Skip the second line
         for line in file:
-            if line != '\n':  # Skip the empty line
+            if line != '/n':  # Skip the empty line
                 parts = line.split()
                 if len(parts) >= 2:  # Check that there are at least two parts
                     ref_values.append(float(parts[1]))
@@ -72,9 +72,9 @@ def mutualCouplingDegrading_sParams():
 # Some example data to display
 @collection.plot_figure(only_build_this=False)
 def mutualCouplingDegrading_sParamsDiffPolari():   
-    with open('Data\data_s11_DiffPolar.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
+    with open('Data/data_s11_DiffPolar.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
         file_data11 = pickle.load(pkl_path)
-    with open('Data\data_s21_DiffPolar.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
+    with open('Data/data_s21_DiffPolar.pkl', 'rb') as pkl_path: #Dump the pickle file at the given file path
         file_data21 = pickle.load(pkl_path)
     fig, ax = plt.subplots()
     frequency = np.arange(500, 3001, 2.5)    
