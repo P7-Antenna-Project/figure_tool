@@ -1,4 +1,3 @@
-
 from figurelib.figure import FigureCollection
 import matplotlib.pyplot as plt
 from figures.cst_loader import load_cst_filePOLAR, load_cst_file
@@ -43,7 +42,7 @@ def SAR_test_dipole_S_param():
     return fig
 
 
-@collection.plot_figure(only_build_this=True)
+@collection.plot_figure()
 def SAR_test_dipole_FFcuts():
     fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
     runids = 4
