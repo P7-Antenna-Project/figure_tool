@@ -1,14 +1,51 @@
 from figurelib.figure import FigureCollection
 import matplotlib.pyplot as plt
-from figures.cst_loader import load_cst_filePOLAR, load_cst_file
+from figures.cst_loader import load_cst_filePOLAR, load_cst_file, load_cst_filePOLARwhenASCIIExport
 import numpy as np
 import pickle
-
 from matplotlib.ticker import FuncFormatter
 
 # Some example data to display
 
 collection = FigureCollection("03Technical")
+
+@collection.plot_figure(only_build_this=False)
+
+def twoDipoles_phi0phi90():
+    fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+    runids = 2
+
+    # Load the files
+    file_to_load = "Data/ff75[1].txt"
+    data = load_cst_filePOLARwhenASCIIExport(file_to_load,runids,8)
+
+    # Convert the degrees to radians
+
+    #for k in range(runids):
+    #num_elements = len(data[k])
+    #data[k][:, 0] = np.linspace(0, 360, num_elements)
+
+
+    degs = np.linspace(0,360,endpoint=True,num=len(data[0][:, 0]))
+    rads = np.deg2rad(degs)
+        
+        #.deg2rad(data[k][:, 0])
+
+    # Plot the figures
+    distance = ["Antenna 1", "Antenna 2"]
+
+    for i in range(runids):
+        ax.plot(np.transpose(rads), data[i][:, 2], label=f"{distance[i]}")
+
+    rad2fmt = lambda x,pos : f"{np.rad2deg(x):.0f}$^{{\circ}}$"
+    ax.xaxis.set_major_formatter(FuncFormatter(rad2fmt))
+
+    ax.set_rlabel_position(-22.5)
+    ax.grid(True)
+    fig.legend()
+    plt.show()
+    
+    return fig
 
 @collection.plot_figure(only_build_this=False)
 def TwodipolesWithBlocker_Results():
@@ -33,7 +70,7 @@ def TwodipolesWithBlocker_Results():
     plt.xlim([1400,2400])
     plt.ylim([-50,0])
     fig.legend()
-    plt.show()
+    
     return fig
 
 
