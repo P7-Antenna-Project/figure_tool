@@ -10,6 +10,31 @@ from matplotlib.ticker import FuncFormatter
 
 collection = FigureCollection("03Technical")
 
+@collection.plot_figure(only_build_this=False)
+def TwodipolesWithBlocker_Results():
+    fig, ax = plt.subplots(1, 1)
+    runids = 8
+
+    file_to_load = "Data/TwodipolesWithBlocker_DATA.txt"
+
+    data = load_cst_file(file_to_load, runids, 2)
+    colors = ['c', 'r', 'k', 'b']
+    line_styles = ["-", "-", "-", "-", "--", "--", "--", "--"]
+    shift_value = 1050 # for shifting frequency of reference data.
+
+    distance = ["S$_{1,1}$,Dist = 10 mm", "S$_{1,1}$,Dist = 50 mm","S$_{1,1}$,Dist = 100 mm","S$_{1,1}$,Dist = 300 mm","S$_{2,1}$,Dist = 10 mm", "S$_{2,1}$,Dist = 50 mm","S$_{2,1}$,Dist = 100 mm","S$_{2,1}$,Dist = 300 mm"]
+    for i in range(runids):
+        frequency = (np.transpose(data[i])[0]* 1000 + shift_value) # converting to MHz
+        ax.plot(frequency, np.transpose(data[i])[1], label=f"{distance[i]}", color=colors[i%len(colors)], linestyle=line_styles[i])
+  
+    ax.grid()
+    plt.xlabel("Frequency [MHz]")
+    plt.ylabel("S$_{1,1}$- and S$_{2,1}$-Parameters [dB]")
+    plt.xlim([1400,2400])
+    plt.ylim([-50,0])
+    fig.legend()
+    plt.show()
+    return fig
 
 
 
