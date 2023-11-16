@@ -35,7 +35,7 @@ def twoDipoles_phi0phi90():
     distance = ["Antenna 1", "Antenna 2"]
     colors = ['r', 'k']
     for i in range(runids):
-        ax.plot(np.transpose(rads), data[i][:, 2], label=f"{distance[i]}",linewidth=2.5, color=colors[i])
+        ax.plot(np.transpose(rads), data[i][:, 2], label=f"{distance[i]}",linewidth=2, color=colors[i])
 
     rad2fmt = lambda x,pos : f"{np.rad2deg(x):.0f}$^{{\circ}}$"
     ax.xaxis.set_major_formatter(FuncFormatter(rad2fmt))
@@ -43,7 +43,6 @@ def twoDipoles_phi0phi90():
     ax.set_rlabel_position(-22.5)
     ax.grid(True)
     fig.legend()
-    plt.show()
     
     return fig
 
