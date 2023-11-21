@@ -35,7 +35,7 @@ def S11_plot_for_parameterize():
         ax.plot(data["Frequency"],data["S1,1"][i])
     #plt.legend()
 
-    ax.set_xlabel("Frequency [GHz]")
+    ax.set_xlabel("Frequency [MHz]")
     ax.set_ylabel("S11 [dB]")
 
     plt.grid()
