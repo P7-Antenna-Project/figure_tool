@@ -29,16 +29,21 @@ def SAR_test_dipole_S_param():
     file_to_load = "Data/SAR_test_S_parameters.txt"
 
     data = load_cst_file(file_to_load, runids, 2)
-    
+    color = ['r','b','c','coral','indigo','k']
     distance = ["d = 0 mm", "d = 3 mm","d = 30 mm","d = 50 mm","d = 80 mm","Ref"]
     for i in range(runids):
-        ax.plot(np.transpose(data[i])[0], np.transpose(data[i])[1], label=f"{distance[i]}")
+        x_data = np.transpose(data[i])[0] * 1000  # Convert GHz to MHz
+        y_data = np.transpose(data[i])[1]
+        ax.plot(x_data, y_data, label=f"{distance[i]}", color=color[i])
+    
+    #for i in range(runids):
+    #    ax.plot(np.transpose(data[i])[0], np.transpose(data[i])[1], label=f"{distance[i]}")
 
     ax.grid()
-    plt.xlabel("Frequency [GHz]")
+    plt.xlabel("Frequency [MHz]")
     plt.ylabel("S$_{1,1}$-Parameter [dB]")
     fig.legend()
-    
+
     return fig
 
 

@@ -95,5 +95,30 @@ def load_cst_filePOLAR(data_file, runIds, coordinate_count):
 
     return data
 
+def load_cst_filePOLARwhenASCIIExport(data_file, runIds, coordinate_count):
+    with open(data_file, 'r') as f:
+        lines = f.readlines()
+    data = []
+    current_runid = []
+    last_value = 0
+
+    for line in lines:
+        if line.startswith('#'):
+            if current_runid:
+                data.append(np.array(current_runid))
+            current_runid = []
+            last_value = 0
+            
+        else:
+            values = [float(x) for x in line.split()]
+            if values[0] < last_value:  # if the value is decreasing            
+                values[0] = values[0] + abs(last_value - 180)  
+            last_value = values[0]
+            current_runid.append(values)
+    if current_runid:
+        data.append(np.array(current_runid))
+    return data
+
 if __name__ == "__main__":
-    print(load_cst_filePOLAR("data/SAR_test_dipole_FFcuts.txt", 3, 8).shape)
+    print("lets go")
+    #print(load_cst_filePOLARwhenASCIIExport("Data/ff75[1].txt", 3, 8).shape)
