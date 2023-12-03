@@ -183,7 +183,7 @@ def mutualCouplingDegrading_sParamsDiffPolari():
     plt.xlim([1200,2500])
     plt.ylim([-100,0])
     plt.grid()
-    print(len(ref_values))
+    #print(len(ref_values))
     return fig 
 
 @collection.plot_figure(only_build_this=False)
@@ -273,15 +273,15 @@ def decision_tree_regression():
     with open('Data/decisionTreeData.txt', 'rb') as file:
         data = np.loadtxt(file)
         # plot the data:
-        plt.figure()
-        plt.scatter(data[:,3], data[:,4], s=20, edgecolor="black", c="white", label="data")
-        plt.plot(data[:,0], data[:,1], color="black", label=f"max_depth={2}", linewidth=2)
-        plt.plot(data[:,0],data[:,2], color="red", label=f"max_depth={5}", linewidth=2)
-        plt.xlabel("Data")
-        plt.ylabel("Target")
-        plt.title("Decision Tree Regression")
-        plt.legend()
-        plt.show()
+        fig, ax = plt.subplots()
+        ax.scatter(data[:,3], data[:,4], s=20, edgecolor="black", c="white", label="data")
+        ax.plot(data[:,0], data[:,1], color="black", label="Dec.Tree w. maxdepth=2", linewidth=2)
+        ax.plot(data[:,0],data[:,2], color="red", label="Dec.Tree w. maxdepth=5", linewidth=2)
+        ax.set_xlabel("Data")
+        ax.set_ylabel("Target")
+        ax.set_title("Decision Tree Regression")
+        ax.legend()
+        ax.grid()
         return fig
 
 if __name__ == "__main__":
