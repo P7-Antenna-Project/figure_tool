@@ -186,6 +186,24 @@ def mutualCouplingDegrading_sParamsDiffPolari():
     print(len(ref_values))
     return fig 
 
+@collection.plot_figure(only_build_this=False) 
+def decision_tree():
+    with open('Data/decisionTreeData.txt', 'rb') as file:
+        data = np.loadtxt(file)
+        # plot the data:
+        plt.figure()
+        plt.scatter(data[:,3], data[:,4], s=20, edgecolor="black", c="white", label="data")
+        plt.plot(data[:,0], data[:,1], color="black", label=f"max_depth={2}", linewidth=2)
+        plt.plot(data[:,0],data[:,2], color="red", label=f"max_depth={5}", linewidth=2)
+        plt.xlabel("Data")
+        plt.ylabel("Target")
+        plt.title("Decision Tree Regression")
+        plt.legend()
+        plt.show()
+        return fig
+    
+
+
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     import numpy as np
@@ -202,3 +220,4 @@ if __name__ == "__main__":
 
     ax.set_title("A line plot on a polar axis", va='bottom')
     #plt.show()
+
