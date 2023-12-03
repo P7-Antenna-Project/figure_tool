@@ -126,7 +126,7 @@ def mutualCouplingDegrading_sParams():
     plt.xlim([1200,2500])
     plt.ylim([-30,0])
     plt.grid()
-    print(len(ref_values))
+   #print(len(ref_values))
     return fig 
 
 
@@ -186,8 +186,90 @@ def mutualCouplingDegrading_sParamsDiffPolari():
     print(len(ref_values))
     return fig 
 
+@collection.plot_figure(only_build_this=False)
+def example_of_ADAM_and_GD():
+
+
+    def objective_function(x, x_second):
+        return 5.640529122 + 0.0039227996579*x_second**4 - 0.0453332137884*x_second**3 - 0.0789151125822*x_second**2 + 1.3452512135487*x_second + 0.0015843236048*x**4 - 0.0271042188636*x**3 + 0.0519540545963*x**2 + 0.9113900300835*x
+
+    def gradient(x, x_second):
+        return 0.006337294420*x**3 - 0.08131265658*x**2 + 0.1039081092*x + 0.9113900300835 , 0.015373294420*x_second**3 - 0.1359996414*x_second**2 - 0.1578302252*x_second + 1.3452512135487
+
+
+
+    def adam_optimizer(learning_rate, beta1, beta2, epsilon, x_init, iterations):
+        # Initial momentum value
+        m = np.zeros(2)
+        v = np.zeros(2)
+
+        # Starting point
+        x_values = [x_init]
+
+        # print(m)
+        # print(v)
+        # print(x_init)
+
+        for _ in range(1, iterations + 1):
+            grad = np.asarray(gradient(*x_init))
+            #print(grad)
+            m = beta1 * m + (1 - beta1) * grad
+            v = beta2 * v + (1 - beta2) * grad**2
+            m_hat = m / (1 - beta1)
+            v_hat = v / (1 - beta2)
+            x_init = x_init - learning_rate * m_hat / (np.sqrt(v_hat) + epsilon)
+            x_values.append(x_init)
+        return x_values
+
+    def gradient_descent(learning_rate, x_init, iterations):
+        x_values = [x_init]
+        for _ in range(1, iterations + 1):
+            grad = np.asarray(gradient(*x_init))
+            x_init = x_init - learning_rate * grad
+            x_values.append(x_init)
+        return x_values
+
+    # Hyperparameters
+    learning_rate = 0.01
+    beta1 = 0.9
+    beta2 = 0.999
+    epsilon = 1e-9
+    iterations = 2000
+    x_init = np.array([5.5, 2.5])
+
+    # Run Adam optimizer
+    x_values = adam_optimizer(learning_rate, beta1, beta2, epsilon, x_init, iterations)
+
+    x_values_2 = gradient_descent(learning_rate, x_init, iterations)
+
+    #print(x_values[-1])
+
+    x = np.linspace(-5.5, 12, 85)
+    y = np.linspace(-5.5,10,85)
+
+    # Make surface plot of objective function
+    X, Y = np.meshgrid(x, y)
+    Z = objective_function(X, Y)
+
+    fig, ax = plt.subplots(1,1)
+
+    # Plot the path taken by the optimizer
+    x_values = np.asarray(x_values)
+    x_values_2 = np.asarray(x_values_2)
+    ax.plot(x_values[:,0], x_values[:,1], 'r',alpha=1, label = 'Adam')
+    ax.plot(x_values_2[:,0], x_values_2[:,1], 'b',alpha=1 ,label = 'Gradient Descent')
+    ax.legend(loc='upper right', frameon=True)
+
+    ax.contour(X, Y, Z, 30)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    #ax.set_zlabel('z')
+
+
+    return fig
+
 @collection.plot_figure(only_build_this=False) 
-def decision_tree():
+def decision_tree_regression():
     with open('Data/decisionTreeData.txt', 'rb') as file:
         data = np.loadtxt(file)
         # plot the data:
@@ -201,8 +283,6 @@ def decision_tree():
         plt.legend()
         plt.show()
         return fig
-    
-
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
