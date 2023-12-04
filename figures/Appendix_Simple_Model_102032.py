@@ -1,6 +1,5 @@
 from figurelib.figure import FigureCollection
 import matplotlib.pyplot as plt
-from tqdm import tqdm
 import numpy as np
 import pandas as pd
 import pickle
