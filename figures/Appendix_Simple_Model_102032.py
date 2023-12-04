@@ -100,10 +100,10 @@ def Comparison_of_models_Without_Case():
             axs[1,i].grid(True)
 
                 
-    #plt.title("Phi")
-    #plt.xlabel('Degree')
-    #plt.ylabel('Gain')
-    #plt.title('Phi gain comparison of generalized models')
+    plt.title("Phi")
+    plt.xlabel('Degree')
+    plt.ylabel('Gain')
+    plt.title('Phi gain comparison of generalized models')
     fig.legend()
     #plt.show()
     plt.grid()   
@@ -146,10 +146,10 @@ def Comparison_of_models_With_Case():
         
 
                 
-    #plt.title("Phi")
-    #plt.xlabel('Degree')
-    #plt.ylabel('Gain')
-    #plt.title('Phi gain comparison of generalized models')
+    plt.title("Phi")
+    plt.xlabel('Degree')
+    plt.ylabel('Gain')
+    plt.title('Phi gain comparison of generalized models')
     fig.legend()
     #plt.show()
     return fig
@@ -187,10 +187,10 @@ def Comparison_of_models_s11():
             
 
                 
-    #plt.title("Phi")
-    #plt.xlabel('Degree')
-    #plt.ylabel('Gain')
-    #plt.title('Phi gain comparison of generalized models')
+    plt.title("Phi")
+    plt.xlabel('Degree')
+    plt.ylabel('Gain')
+    plt.title('Phi gain comparison of generalized models')
     fig.legend()
     plt.grid()  
     #plt.show()  
@@ -216,7 +216,7 @@ def Comparison_Of_Port_S11_Med():
     return fig
 
 
-@collection.plot_figure(only_build_this = True)
+@collection.plot_figure(only_build_this = False)
 def Comparison_Of_Port_S11_Uden():
     S11UdenCase_1 = np.loadtxt(open('Data/Generalisering/s11/S11_UdenCase_1.txt'), delimiter='\t', skiprows=1, unpack=True)
     S11UdenCase_2 = np.loadtxt(open('Data/Generalisering/s11/S11_UdenCase_2.txt'), delimiter='\t', skiprows=1, unpack=True)
@@ -232,5 +232,5 @@ def Comparison_Of_Port_S11_Uden():
     plt.title('Comparison of S1,1 parameters without case')
     plt.legend()
     plt.grid()
-    plt.show()
+    #plt.show()
     return fig
