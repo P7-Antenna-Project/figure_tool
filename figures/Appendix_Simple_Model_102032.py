@@ -8,46 +8,46 @@ from figures.cst_loader import load_cst_filePOLAR, load_cst_file
 collection = FigureCollection("Simple model") # Name of the collection
 
 
-@collection.plot_figure()
-def Comparison_Of_Phi():
-    On_bat = np.loadtxt(open('Data\Antenna_Port_Bat.txt'), delimiter='\t', skiprows=1, unpack=True)
-    fig, ax = plt.subplots()   
-    ax.plot(On_PCB[0], On_PCB[1], label='On PCB')
-    ax.plot(On_bat[0], On_bat[1], label='On Battery')
-    plt.xlabel('Frequency [MHz]')
-    plt.ylabel('S1,1 [dB]')
-    plt.title('Comparison of S1,1 parameters based on port placement')
-    plt.legend()
-    plt.grid()
-    return fig
+# @collection.plot_figure()
+# def Comparison_Of_Phi():
+#     On_bat = np.loadtxt(open('Data\Antenna_Port_Bat.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     fig, ax = plt.subplots()   
+#     ax.plot(On_PCB[0], On_PCB[1], label='On PCB')
+#     ax.plot(On_bat[0], On_bat[1], label='On Battery')
+#     plt.xlabel('Frequency [MHz]')
+#     plt.ylabel('S1,1 [dB]')
+#     plt.title('Comparison of S1,1 parameters based on port placement')
+#     plt.legend()
+#     plt.grid()
+#     return fig
 
-@collection.plot_figure()
-def Comparison_Of_Theta():
-    On_PCB = np.loadtxt(open('Data\Antenna_port_on_PCB.txt'), delimiter='\t', skiprows=1, unpack=True)
-    On_bat = np.loadtxt(open('Data\Antenna_Port_Bat.txt'), delimiter='\t', skiprows=1, unpack=True)
-    fig, ax = plt.subplots()   
-    ax.plot(On_PCB[0], On_PCB[1], label='On PCB')
-    ax.plot(On_bat[0], On_bat[1], label='On Battery')
-    plt.xlabel('Frequency [MHz]')
-    plt.ylabel('S1,1 [dB]')
-    plt.title('Comparison of S1,1 parameters based on port placement')
-    plt.legend()
-    plt.grid()
-    return fig
+# @collection.plot_figure()
+# def Comparison_Of_Theta():
+#     On_PCB = np.loadtxt(open('Data\Antenna_port_on_PCB.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     On_bat = np.loadtxt(open('Data\Antenna_Port_Bat.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     fig, ax = plt.subplots()   
+#     ax.plot(On_PCB[0], On_PCB[1], label='On PCB')
+#     ax.plot(On_bat[0], On_bat[1], label='On Battery')
+#     plt.xlabel('Frequency [MHz]')
+#     plt.ylabel('S1,1 [dB]')
+#     plt.title('Comparison of S1,1 parameters based on port placement')
+#     plt.legend()
+#     plt.grid()
+#     return fig
 
-@collection.plot_figure()
-def Comparison_Of_Port_placement():
-    On_PCB = np.loadtxt(open('Data\Antenna_port_on_PCB.txt'), delimiter='\t', skiprows=1, unpack=True)
-    On_bat = np.loadtxt(open('Data\Antenna_Port_Bat.txt'), delimiter='\t', skiprows=1, unpack=True)
-    fig, ax = plt.subplots()   
-    ax.plot(On_PCB[0], On_PCB[1], label='On PCB')
-    ax.plot(On_bat[0], On_bat[1], label='On Battery')
-    plt.xlabel('Frequency [MHz]')
-    plt.ylabel('S1,1 [dB]')
-    plt.title('Comparison of S1,1 parameters based on port placement')
-    plt.legend()
-    plt.grid()
-    return fig
+# @collection.plot_figure()
+# def Comparison_Of_Port_placement():
+#     On_PCB = np.loadtxt(open('Data\Antenna_port_on_PCB.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     On_bat = np.loadtxt(open('Data\Antenna_Port_Bat.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     fig, ax = plt.subplots()   
+#     ax.plot(On_PCB[0], On_PCB[1], label='On PCB')
+#     ax.plot(On_bat[0], On_bat[1], label='On Battery')
+#     plt.xlabel('Frequency [MHz]')
+#     plt.ylabel('S1,1 [dB]')
+#     plt.title('Comparison of S1,1 parameters based on port placement')
+#     plt.legend()
+#     plt.grid()
+#     return fig
 
 Adv_WC_WW   = np.loadtxt(open('Data/Generalisering/RTX/Adv_WC_WW.txt'),        delimiter='\t', skiprows=1, unpack=True)
 Adv_NOC_WW  = np.loadtxt(open('Data/Generalisering/RTX/Adv_NOC_WW.txt'),       delimiter='\t', skiprows=1, unpack=True)
@@ -72,7 +72,7 @@ S20_WC_NOW  = np.loadtxt(open('Data/Generalisering/old/Simple20_WC_NOW.txt'),  d
 def Comparison_of_models_Without_Case():
     fig, axs = plt.subplots(2,4)
 
-    with open(r"C:\Users\ndrazzar\Documents\GitHub\figure_tool\Data\Generalisering\dictionaries\uden_case.pkl", "rb") as pkl_to_load:
+    with open('Data/Generalisering/dictionaries/uden_case.pkl', "rb") as pkl_to_load:
         Angle_dict = pickle.load(pkl_to_load)
 
     print(Angle_dict.keys())
@@ -105,7 +105,7 @@ def Comparison_of_models_Without_Case():
     plt.ylabel('Gain')
     plt.title('Phi gain comparison of generalized models')
     fig.legend()
-    #plt.show()
+    plt.show()
     plt.grid()   
     return fig
 
@@ -113,7 +113,7 @@ def Comparison_of_models_Without_Case():
 def Comparison_of_models_With_Case():
     fig, axs = plt.subplots(2,4)
 
-    with open(r"C:\Users\ndrazzar\Documents\GitHub\figure_tool\Data\Generalisering\dictionaries\med_case.pkl", "rb") as pkl_to_load:
+    with open('Data/Generalisering/dictionaries/med_case.pkl', "rb") as pkl_to_load:
         Angle_dict = pickle.load(pkl_to_load)
 
     print(Angle_dict["combined gain list"].shape)
@@ -151,7 +151,7 @@ def Comparison_of_models_With_Case():
     plt.ylabel('Gain')
     plt.title('Phi gain comparison of generalized models')
     fig.legend()
-    #plt.show()
+    plt.show()
     return fig
 
 
@@ -159,7 +159,7 @@ def Comparison_of_models_With_Case():
 def Comparison_of_models_s11():
     fig, axs = plt.subplots(2,4)
 
-    with open(r"C:\Users\ndrazzar\Documents\GitHub\figure_tool\Data\Generalisering\dictionaries\med_case.pkl", "rb") as pkl_to_load:
+    with open('Data/Generalisering/dictionaries/med_case.pkl', "rb") as pkl_to_load:
         Angle_dict = pickle.load(pkl_to_load)
 
     print(Angle_dict["combined gain list"].shape)
@@ -193,7 +193,7 @@ def Comparison_of_models_s11():
     plt.title('Phi gain comparison of generalized models')
     fig.legend()
     plt.grid()  
-    #plt.show()  
+    plt.show()  
     return fig
 
 
@@ -213,6 +213,7 @@ def Comparison_Of_Port_S11_Med():
     plt.title('Comparison of S1,1 parameters in Generalization')
     plt.legend()
     plt.grid()
+    plt.show()
     return fig
 
 
@@ -232,5 +233,5 @@ def Comparison_Of_Port_S11_Uden():
     plt.title('Comparison of S1,1 parameters without case')
     plt.legend()
     plt.grid()
-    #plt.show()
+    plt.show()
     return fig
