@@ -230,7 +230,7 @@ def activationFunctions():
 
 
 
-=======
+
 @collection.plot_figure(only_build_this=False)
 def example_of_ADAM_and_GD():
 
