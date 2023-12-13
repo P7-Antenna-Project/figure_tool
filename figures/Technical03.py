@@ -186,8 +186,6 @@ def mutualCouplingDegrading_sParamsDiffPolari():
     #print(len(ref_values))
     return fig 
 
-<<<<<<< HEAD
-
 
 @collection.plot_figure(only_build_this=False)
 def activationFunctions():   
