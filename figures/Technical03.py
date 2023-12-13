@@ -199,7 +199,8 @@ def activationFunctions():
         return np.maximum(0, x)
 
     x = np.linspace(-5, 5, 100)
-
+    fig, ax = plt.subplots()
+    
     plt.figure(figsize=(15, 5))
 
     plt.subplot(1, 3, 1)
