@@ -326,7 +326,6 @@ def decision_tree_regression():
         ax.legend()
         ax.grid()
         return fig
->>>>>>> ff784bb379539705ca5ae2f4e27e4ea5bd99d03e
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
