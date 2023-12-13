@@ -187,43 +187,43 @@ def mutualCouplingDegrading_sParamsDiffPolari():
     return fig 
 
 
-@collection.plot_figure(only_build_this=False)
-def activationFunctions():   
-    def sigmoid(x):
-        return 1 / (1 + np.exp(-x))
+# @collection.plot_figure(only_build_this=True)
+# def activationFunctions():   
+#     def sigmoid(x):
+#         return 1 / (1 + np.exp(-x))
 
-    def tanh(x):
-        return (np.exp(x) - np.exp(-x)) / (np.exp(x) + np.exp(-x))
+#     def tanh(x):
+#         return (np.exp(x) - np.exp(-x)) / (np.exp(x) + np.exp(-x))
 
-    def reLU(x):
-        return np.maximum(0, x)
+#     def reLU(x):
+#         return np.maximum(0, x)
 
-    x = np.linspace(-5, 5, 100)
-    fig, ax = plt.subplots()
-    
-    plt.figure(figsize=(15, 5))
+#     x = np.linspace(-5, 5, 100)
+#     # fig, ax = plt.subplots()
 
-    plt.subplot(1, 3, 1)
-    plt.plot(x, sigmoid(x),linewidth=2)
-    plt.title('Sigmoid Function')
-    #plt.ylabel('sigmoid(x)')
-    plt.grid(True)
+#     fig = plt.figure(figsize=(15, 5))
 
-    plt.subplot(1, 3, 2)
-    plt.plot(x, tanh(x),linewidth=2)
-    plt.title('tanh Function')  
-    #plt.ylabel('tanh(x)')
-    plt.grid(True)
+#     plt.subplot(1, 3, 1,figsize=(5, 5)) 
+#     plt.plot(x, sigmoid(x),linewidth=2)
+#     plt.title('Sigmoid Function')
+#     #plt.ylabel('sigmoid(x)')
+#     plt.grid(True)
 
-    plt.subplot(1, 3, 3)
-    plt.plot(x, reLU(x),linewidth=2)
-    plt.title('reLU Function')
-    #plt.ylabel('reLU(x)')
-    plt.grid(True)
+#     plt.subplot(1, 3, 2,figsize=(5, 5))
+#     plt.plot(x, tanh(x),linewidth=2)
+#     plt.title('tanh Function')  
+#     #plt.ylabel('tanh(x)')
+#     plt.grid(True)
 
-    # plt.show()
+#     plt.subplot(1, 3, 3,figsize=(5, 5))
+#     plt.plot(x, reLU(x),linewidth=2)
+#     plt.title('reLU Function')
+#     #plt.ylabel('reLU(x)')
+#     plt.grid(True)
 
-    return fig 
+#     plt.show()
+
+#     return fig 
 
 
 
