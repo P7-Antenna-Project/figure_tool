@@ -220,7 +220,7 @@ def activationFunctions():
     #plt.ylabel('reLU(x)')
     plt.grid(True)
 
-    #plt.show()
+    # plt.show()
 
     return fig 
 
