@@ -10,7 +10,6 @@ from matplotlib.ticker import FuncFormatter
 collection = FigureCollection("03Technical")
 
 @collection.plot_figure(only_build_this=False)
-
 def twoDipoles_phi0phi90():
     fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
     runids = 2

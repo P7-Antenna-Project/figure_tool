@@ -46,7 +46,7 @@ def Comparison_Of_models_wire():
     plt.grid()
     return fig
 
-@collection.plot_figure(only_build_this=True)
+@collection.plot_figure(only_build_this=False)
 def Comparison_Of_models_case():
     fig, ax, = plt.subplots()   
     ax.plot(Adv_WC_NOW[0], Adv_WC_NOW[1], label='Advanced model WITH CASE')
