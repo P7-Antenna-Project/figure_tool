@@ -6,6 +6,9 @@ from . import Technical03
 from . import system
 #from . import appendix_Simple_model
 from . import Appendix_Simple_Model_102032
+from . import Application04
+
+
 main_container = FigureContainer(
     [
         Introduction1.collection,
@@ -14,5 +17,6 @@ main_container = FigureContainer(
         system.collection,
         #appendix_Simple_model.collection,
         Appendix_Simple_Model_102032.collection,
+        Application04.collection
     ]
 )

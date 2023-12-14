@@ -12,7 +12,7 @@ from matplotlib.ticker import FuncFormatter
 collection = FigureCollection("system_design")
 
 
-@collection.plot_figure(only_build_this=True)
+@collection.plot_figure(only_build_this=False)
 def S11_plot_for_parameterize():
     fig, ax = plt.subplots(1, 1)
     runids = 10
