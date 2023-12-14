@@ -12,9 +12,9 @@ from matplotlib.ticker import FuncFormatter
 collection = FigureCollection("system_design")
 
 
-@collection.plot_figure(only_build_this=True)
+@collection.plot_figure(only_build_this=False)
 def S11_plot_for_parameterize():
-    fig, ax = plt.subplots(1, 1)
+    fig, ax = plt.subplots(1, 1, figsize=(6, 4))
     runids = 10
 
     file_to_load = "Data/Simple_wire_2_short.pkl"
@@ -39,7 +39,7 @@ def S11_plot_for_parameterize():
     ax.set_ylabel("S11 [dB]")
 
     plt.grid()
-    #plt.show()
+    # plt.show()
 
     return fig
 

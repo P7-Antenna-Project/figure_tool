@@ -105,7 +105,7 @@ def Comparison_of_models_Without_Case():
     plt.ylabel('Gain')
     plt.title('Phi gain comparison of generalized models')
     fig.legend()
-    plt.show()
+    # plt.show()
     plt.grid()   
     return fig
 
@@ -151,7 +151,7 @@ def Comparison_of_models_With_Case():
     plt.ylabel('Gain')
     plt.title('Phi gain comparison of generalized models')
     fig.legend()
-    plt.show()
+    # plt.show()
     return fig
 
 
@@ -193,7 +193,7 @@ def Comparison_of_models_s11():
     plt.title('Phi gain comparison of generalized models')
     fig.legend()
     plt.grid()  
-    plt.show()  
+    # plt.show()  
     return fig
 
 
@@ -213,7 +213,7 @@ def Comparison_Of_Port_S11_Med():
     plt.title('Comparison of S1,1 parameters in Generalization')
     plt.legend()
     plt.grid()
-    plt.show()
+    # plt.show()
     return fig
 
 
@@ -233,5 +233,5 @@ def Comparison_Of_Port_S11_Uden():
     plt.title('Comparison of S1,1 parameters without case')
     plt.legend()
     plt.grid()
-    plt.show()
+    # plt.show()
     return fig

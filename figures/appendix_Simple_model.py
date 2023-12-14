@@ -61,6 +61,6 @@ def Comparison_Of_models_case():
     plt.title('Comparison of S1,1 parameters based on model')
     plt.legend()
     plt.grid()
-    plt.show()
+    #plt.show()
     return fig
 
