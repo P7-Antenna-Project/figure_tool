@@ -38,7 +38,7 @@ def inverse_model_loss():
 @collection.plot_figure(only_build_this=False)
 def inverse_model_predict():
 
-    data = np.load("Data\inverse_model_parametric_predict.npy")
+    data = np.load("Data/inverse_model_parametric_predict.npy")
     fig = plt.figure(figsize=(15, 15))
     #fig.set_figheight(20)
     # Plot the data
@@ -58,5 +58,5 @@ def inverse_model_predict():
         if i == 1:
             plt.legend([bars1, bars2], ['Pred', 'Test'])
 
-    
+
     return fig
