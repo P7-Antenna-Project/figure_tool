@@ -219,7 +219,7 @@ def activationFunctions():
 
     plt.subplot(1, 3, 3)
     plt.plot(x, reLU(x),linewidth=2)
-    plt.title('reLU Function')
+    plt.title('ReLU Function')
     ax[2].set_xlim(-5,5)
 
     #plt.ylabel('reLU(x)')
