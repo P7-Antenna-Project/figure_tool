@@ -21,8 +21,8 @@ def S11_plot_for_parameterize():
 
     data = pickle.load(open(file_to_load, "rb"))
 
-    print(data.keys())
-    print(data["S1,1"].shape)
+    #print(data.keys())
+    #print(data["S1,1"].shape)
 
     # Make a list of random samples
     #random_indexes = random.sample(range(1880), runids)
