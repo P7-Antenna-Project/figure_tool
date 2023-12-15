@@ -58,5 +58,5 @@ def inverse_model_predict():
         if i == 1:
             plt.legend([bars1, bars2], ['Pred', 'Test'])
 
-
+    
     return fig
