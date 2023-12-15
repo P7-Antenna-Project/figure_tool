@@ -186,43 +186,48 @@ def mutualCouplingDegrading_sParamsDiffPolari():
     return fig 
 
 
-# @collection.plot_figure(only_build_this=True)
-# def activationFunctions():   
-#     def sigmoid(x):
-#         return 1 / (1 + np.exp(-x))
+@collection.plot_figure(only_build_this=True)
+def activationFunctions():   
+    def sigmoid(x):
+        return 1 / (1 + np.exp(-x))
 
-#     def tanh(x):
-#         return (np.exp(x) - np.exp(-x)) / (np.exp(x) + np.exp(-x))
+    def tanh(x):
+        return (np.exp(x) - np.exp(-x)) / (np.exp(x) + np.exp(-x))
 
-#     def reLU(x):
-#         return np.maximum(0, x)
+    def reLU(x):
+        return np.maximum(0, x)
 
-#     x = np.linspace(-5, 5, 100)
-#     # fig, ax = plt.subplots()
+    x = np.linspace(-6, 6, 100)
+    # fig, ax = plt.subplots()
 
-#     fig = plt.figure(figsize=(15, 5))
+    fig, ax = plt.subplots(1,3)
 
-#     plt.subplot(1, 3, 1,figsize=(5, 5)) 
-#     plt.plot(x, sigmoid(x),linewidth=2)
-#     plt.title('Sigmoid Function')
-#     #plt.ylabel('sigmoid(x)')
-#     plt.grid(True)
+    plt.subplot(1, 3, 1) 
+    plt.plot(x, sigmoid(x),linewidth=2)
+    plt.title('Sigmoid Function')
+    ax[0].set_xlim(-5,5)
 
-#     plt.subplot(1, 3, 2,figsize=(5, 5))
-#     plt.plot(x, tanh(x),linewidth=2)
-#     plt.title('tanh Function')  
-#     #plt.ylabel('tanh(x)')
-#     plt.grid(True)
+    #plt.ylabel('sigmoid(x)')
+    plt.grid(True)
 
-#     plt.subplot(1, 3, 3,figsize=(5, 5))
-#     plt.plot(x, reLU(x),linewidth=2)
-#     plt.title('reLU Function')
-#     #plt.ylabel('reLU(x)')
-#     plt.grid(True)
+    plt.subplot(1, 3, 2)
+    plt.plot(x, tanh(x),linewidth=2)
+    plt.title('tanh Function')  
+    ax[1].set_xlim(-5,5)
+    #plt.ylabel('tanh(x)')
+    plt.grid(True)
 
-#     plt.show()
+    plt.subplot(1, 3, 3)
+    plt.plot(x, reLU(x),linewidth=2)
+    plt.title('reLU Function')
+    ax[2].set_xlim(-5,5)
 
-#     return fig 
+    #plt.ylabel('reLU(x)')
+    plt.grid(True)
+
+    #ax.set_xlim(-5,5)
+
+    return fig 
 
 
 
@@ -315,17 +320,17 @@ def example_of_ADAM_and_GD():
 def decision_tree_regression():
     with open('Data/decisionTreeData.txt', 'rb') as file:
         data = np.loadtxt(file)
-        # plot the data:
-        fig, ax = plt.subplots()
-        ax.scatter(data[:,3], data[:,4], s=20, edgecolor="black", c="white", label="data")
-        ax.plot(data[:,0], data[:,1], color="black", label="Dec.Tree w. maxdepth=2", linewidth=2)
-        ax.plot(data[:,0],data[:,2], color="red", label="Dec.Tree w. maxdepth=5", linewidth=2)
-        ax.set_xlabel("Data")
-        ax.set_ylabel("Target")
-        ax.set_title("Decision Tree Regression")
-        ax.legend()
-        ax.grid()
-        return fig
+    # plot the data:
+    fig, ax = plt.subplots()
+    ax.scatter(data[:,3], data[:,4], s=20, edgecolor="black", c="white", label="data")
+    ax.plot(data[:,0], data[:,1], color="black", label="Dec.Tree w. maxdepth=2", linewidth=2)
+    ax.plot(data[:,0],data[:,2], color="red", label="Dec.Tree w. maxdepth=5", linewidth=2)
+    ax.set_xlabel("Data")
+    ax.set_ylabel("Target")
+    ax.set_title("Decision Tree Regression")
+    ax.legend()
+    ax.grid()
+    return fig
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
