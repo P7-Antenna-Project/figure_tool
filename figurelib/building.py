@@ -53,7 +53,7 @@ class FigureBuilder:
                 except Exception as e:
                     print(
                         termcolor.colored(
-                            f"Failed to build {collection}:{figure.name}. You probably forgot to return a figure. Error: {e}",
+                            f"Failed to build {collection}:{figure.name}. Error: {e}",
                             "red",
                         )
                     )

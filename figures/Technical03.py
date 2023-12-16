@@ -186,7 +186,7 @@ def mutualCouplingDegrading_sParamsDiffPolari():
     return fig 
 
 
-@collection.plot_figure(only_build_this=True)
+@collection.plot_figure(only_build_this=True, width=1, height=0.5)
 def activationFunctions():   
     def sigmoid(x):
         return 1 / (1 + np.exp(-x))

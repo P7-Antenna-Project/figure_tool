@@ -1,5 +1,5 @@
-# EIT7 Figure Tool
-[![build figures](https://github.com/P7-Antenna-Project/figure_tool/actions/workflows/build.yml/badge.svg)](https://github.com/P7-Antenna-Project/figure_tool/actions/workflows/build.yml)
+# EIT6 Figure Tool
+[![build figures](https://github.com/EIT6-Beacon/figure_tool/actions/workflows/build.yml/badge.svg)](https://github.com/EIT6-Beacon/figure_tool/actions/workflows/build.yml)
 
 This tools assists in creating consistent matplotlib figures with version-control. 
 
@@ -23,7 +23,7 @@ You can run a build locally by running the following script in a terminal
 python build.py
 ```
 
-this will rebuild all the figures in publication quality. If instead you want a faster build, you can use draft mode. Keep in mind this might cause significant artifacts in the figures.
+this will rebuild all the figures in publication quality. If instead you want a faster build, you can use draft mode. This will only build those figures initialized with `@collection.plot_figure(..., only_build_this=True)`. Keep in mind that if no figure has this flag set, draft mode is completely equivalent to the standard build mode, and all figures will be built.
 
 ```bash
 python build.py build -d
@@ -65,7 +65,7 @@ def figure1():
 An alternative syntax is
 
 ```python
-@collection.plot_figure(only_build = True)
+@collection.plot_figure(only_build_this=True)
 def figure1(fig, ax):
     # Some example data to display
     x = np.linspace(0, 2 * np.pi, 400)
@@ -76,3 +76,32 @@ def figure1(fig, ax):
 
     return fig
 ```
+
+### Scaling figures
+By default, the width of a figure is equal to the width of an A4 page with 2.54 cm margins (453pt). The height is automatically calculated such that the ratio between the width and height is the golden ratio. The default settings, equivalent to omitting both the `height` and `width` settings are
+```python
+@collection.plot_figure(width=1.0, height=1.0)
+def figure1(fig, ax):
+```
+
+There are a couple options when you want to scale a figure. Both `width` and `height` can be specified as a float, in which case the size is relative to the default size. Note that the `height` scaling is always applied _after_ the figure height has been calculated to conform to the golden ratio, i.e. when `height=1.0` the ratio between the width and the height is the golden ratio.
+
+For example, setting the width of a figure to half of a standard page (omitting the height setting, such that it is automatically calculated)
+```python
+@collection.plot_figure(width=0.5)
+def figure1(fig, ax):
+```
+
+Setting the width of a figure to half of a standard page, and cutting the height in half
+```python
+@collection.plot_figure(width=0.5, height=0.5)
+def figure1(fig, ax):
+```
+
+If the relative sizing and the automatic calculation are prohibitive to what you're trying to achieve, both dimensions can be specified absolutely in a string. The supported units are `mm`, `cm`, `pt` and `in`:
+```python
+@collection.plot_figure(width="3cm", height="30mm")
+def figure1(fig, ax):
+```
+
+

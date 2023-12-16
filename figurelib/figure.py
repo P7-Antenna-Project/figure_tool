@@ -5,6 +5,7 @@ import typing
 import inspect
 import pathlib
 from jinja2 import Environment, FileSystemLoader
+import re
 
 # Jinja environment
 def is_raw_latex(value):
@@ -70,18 +71,19 @@ class RawLatex:
         self.latex_string = latex_string
 
 class Figure:
-    def __init__(self, name, builder, width, subplots, only_build_this):
+    def __init__(self, name, builder, width, height, subplots, only_build_this):
         # Basic properties
         self.name = name
         self.builder = builder
 
         # Build options
         self.width = width
+        self.height = height
         self.subplots = subplots
         self.only_build_this = only_build_this
 
     def _apply_styles(self, figure: matplotlib.figure.Figure):
-        fig_width, fig_height = self._get_figsize(self.width, self.subplots)
+        fig_width, fig_height = self._get_figsize(self.width, self.height, self.subplots)
         figure.set_size_inches(fig_width, fig_height)
         figure.set_constrained_layout(True)
 
@@ -106,15 +108,68 @@ class Figure:
 
     def _pt_to_in(self, pt):
         return pt * 1 / 72.27
+    
+    def _mm_to_in(self, mm):
+        return mm * 1 / 25.4
+    
+    def _cm_to_in(self, cm):
+        return cm * 1 / 2.54
+    
+    def _parse_dim_to_in(self, dim: str):
+        dimension = re.search(r'^(\d+(?:\.\d*)?)\s*(mm|cm|pt|in)$', dim)
 
-    def _get_figsize(self, fraction, subplots):
+        if dimension is None:
+            raise ValueError(f"Invalid dimension format: {dim}. The correct format is <float or int> <mm or cm or pt or int>.")
+        
+        try:
+            value = float(dimension.group(1))
+        except ValueError:
+            raise ValueError(f"Invalid length specified: {dimension.group(1)}.")
+        
+        unit = dimension.group(2)            
+        
+        if unit == "mm":
+            return self._mm_to_in(value)
+        elif unit == "cm":
+            return self._cm_to_in(value)
+        elif unit == "pt":
+            return self._pt_to_in(value)
+        elif unit == "in":
+            return value
+        else:
+            raise ValueError("Invalid unit specified. Valid units are mm, cm, pt and in.")
+
+    def _get_figsize_base(self, base_width, subplots):
         golden_ratio = (5**0.5 - 1) / 2
 
-        # The default pagewidth of the report-class is 453pt
-        fig_width = self._pt_to_in(453) * fraction
+        fig_width = base_width
         fig_height = fig_width * golden_ratio * (subplots[0] / subplots[1])
 
         return (fig_width, fig_height)
+    
+    def _get_figsize(self, width, height, subplots):
+        # Determine base figure size
+        if isinstance(width, float) or isinstance(width, int):
+            # The default pagewidth of the report-class is 453pt
+            base_width = width * self._pt_to_in(453)
+        elif isinstance(width, str):
+            base_width = self._parse_dim_to_in(width)
+        else:
+            raise ValueError("Invalid type for dimension, expected float, int or str.")
+            
+        fig_size = self._get_figsize_base(base_width, subplots)
+
+        # Adjusting height
+        if isinstance(height, float) or isinstance(height, int):
+            # Keep same width, but scale the height by height-ratio
+            fig_size = (fig_size[0], fig_size[1] * height)
+        elif isinstance(height, str):
+            # Keep same width, but overwrite the height by absolute length
+            fig_size = (fig_size[0], self._parse_dim_to_in(height))
+        else:
+            raise ValueError("Invalid type for dimension, expected float, int or str.")
+        
+        return fig_size
 
     def __str__(self) -> str:
         return self.name
@@ -156,7 +211,8 @@ class FigureCollection:
 
     def plot_figure(
         self,
-        width: float = 1.0,
+        width: typing.Union[float, int, str] = 1.0,
+        height: typing.Union[float, int, str] = 1.0,
         subplots: tuple[int, int] = (1, 1),
         only_build_this: bool = False,
     ):
@@ -204,7 +260,7 @@ class FigureCollection:
 
             # Add figure and the provided builder the the collection
             self.figures.append(
-                Figure(func.__name__, inner_injector, width, subplots, only_build_this)
+                Figure(func.__name__, inner_injector, width, height, subplots, only_build_this)
             )
             return inner_injector
 
