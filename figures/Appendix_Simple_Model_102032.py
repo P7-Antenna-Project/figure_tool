@@ -75,7 +75,7 @@ def Comparison_of_models_Without_Case():
     with open('Data/Generalisering/dictionaries/uden_case.pkl', "rb") as pkl_to_load:
         Angle_dict = pickle.load(pkl_to_load)
 
-    print(Angle_dict.keys())
+    #print(Angle_dict.keys())
 
     for i in range(4):
         
@@ -116,7 +116,7 @@ def Comparison_of_models_With_Case():
     with open('Data/Generalisering/dictionaries/med_case.pkl', "rb") as pkl_to_load:
         Angle_dict = pickle.load(pkl_to_load)
 
-    print(Angle_dict["combined gain list"].shape)
+    #print(Angle_dict["combined gain list"].shape)
 
     for i in range(4):
         for k in range(4):
@@ -162,7 +162,7 @@ def Comparison_of_models_s11():
     with open('Data/Generalisering/dictionaries/med_case.pkl', "rb") as pkl_to_load:
         Angle_dict = pickle.load(pkl_to_load)
 
-    print(Angle_dict["combined gain list"].shape)
+    #print(Angle_dict["combined gain list"].shape)
 
     for i in range(4):
         for k in range(4):
