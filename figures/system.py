@@ -48,7 +48,7 @@ def sigmoidWeightedLosses():
     fig, ax = plt.subplots(1, 1, figsize=(5, 3))
     # plot sigmoid function 2*sigmoid(-x)+2
     x = np.linspace(-10,10,100)
-    y_sigmoid2 = 2*(1/(1+np.exp(-x+5)))
+    y_sigmoid2 = 2*(1/(1+np.exp(-x)))
     # plot normal sigmoid   
     y_sigmoid = 1/(1+np.exp(-x))
     plt.plot(x,y_sigmoid,linewidth=2,color="black")
