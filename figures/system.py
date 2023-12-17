@@ -92,3 +92,54 @@ def arbitraryS11Curve_discussion():
     ax.grid(True)
     
     return fig
+
+
+@collection.plot_figure(only_build_this=False,width=.75, height=.75)
+def costFunctionExample():
+    x1 = np.linspace(0, 8, 100)
+    x2 = np.linspace(8, 10, 100)
+    x3 = np.linspace(10, 14, 100)
+    x4 = np.linspace(14, 20, 100)
+
+    # Define the y values for each segment
+    y1 = np.ones_like(x1)
+    y2 = 6 * (np.exp((x2 - x2[0])) - 1) / (np.exp(2) - 1) + 1  # Faster exponential increase, max value of 7
+
+    # Make sure y3 starts where y2 ends and ends at 2
+    start_y3 = y2[-1]
+    end_y3 = 2
+    rate_y3 = (start_y3 - end_y3) / (x3[-1] - x3[0])
+    y3 = start_y3 - rate_y3 * (x3 - x3[0])  # Exponential decrease
+
+    # Make sure y4 starts where y3 ends
+    start_y4 = y3[-1]
+    y4 = start_y4 * np.ones_like(x4)
+
+    # Concatenate the x and y values
+    x = np.concatenate((x1, x2, x3, x4))
+    y = np.concatenate((y1, y2, y3, y4))
+    fig, ax = plt.subplots(figsize=(8, 4))
+    
+    # Plot the curve
+    ax.plot(x, y,linewidth = 2)
+    # ax.set_title('Cost Function')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_xlim(0, 17)
+    ax.set_ylim(0, 8)
+    ax.grid(True)
+    return fig
+
+    
+    
+    # plt.figure(figsize=(10, 6))
+    
+    
+    # plt.plot(x, y)
+    # # plt.title('')
+    # plt.xlabel('x')
+    # plt.ylabel('y')
+    # plt.grid(True)
+    # plt.show()
+
+    # return fig
