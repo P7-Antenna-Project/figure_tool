@@ -132,14 +132,27 @@ def costFunctionExample():
 
     
     
-    # plt.figure(figsize=(10, 6))
+@collection.plot_figure(only_build_this=False)
+def s11_plot():
+   # load .txt file:
+    skiprows = 2
+    data = np.loadtxt("Data/s11_verification.txt", skiprows=skiprows)
     
-    
-    # plt.plot(x, y)
-    # # plt.title('')
-    # plt.xlabel('x')
-    # plt.ylabel('y')
-    # plt.grid(True)
-    # plt.show()
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.plot(data[:,0],data[:,1],linewidth = 2)
+    # ax.set_title('S11 Curve')
+    ax.set_xlabel('Frequency [MHz]')
+    ax.set_ylabel('S11 [dB]')
 
-    # return fig
+    ax.plot(1900*np.ones_like([-10]), [-15.34], marker='o', markersize=5, color="black")
+    ax.plot((1846)*np.ones_like([-10]), [-10], marker='o', markersize=5, color="black")
+    ax.plot((1959)*np.ones_like([-10]), [-10], marker='o', markersize=5, color="black")
+    #add text to the markers:
+    ax.text(1900, -16.7, "1900 MHz",horizontalalignment='center',verticalalignment='bottom')
+    ax.text(1900-100, -10, "1846 MHz",horizontalalignment='right',verticalalignment='bottom')
+    ax.text(1900+350, -10, "1959 MHz",horizontalalignment='right',verticalalignment='bottom')
+    ax.set_xlim(500,3000)
+    ax.set_ylim(-20,0)    
+    ax.grid(True)
+    # plt.show()
+    return fig
