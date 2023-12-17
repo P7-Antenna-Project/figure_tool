@@ -8,6 +8,7 @@ from . import system
 from . import Appendix_Simple_Model_102032
 from . import Application04
 from . import appendix_para
+from . import Test
 
 main_container = FigureContainer(
     [
@@ -18,6 +19,7 @@ main_container = FigureContainer(
         #appendix_Simple_model.collection,
         Appendix_Simple_Model_102032.collection,
         Application04.collection,
-        appendix_para.collection
+        appendix_para.collection,
+        Test.collection
     ]
 )
