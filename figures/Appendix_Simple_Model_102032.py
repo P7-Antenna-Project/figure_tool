@@ -68,7 +68,7 @@ S20_WC_NOW  = np.loadtxt(open('Data/Generalisering/old/Simple20_WC_NOW.txt'),  d
                     
 
 
-@collection.plot_figure(only_build_this = True)
+@collection.plot_figure(only_build_this = False)
 def Comparison_of_models_Without_Case():
     fig, axs = plt.subplots(2,4)
 
@@ -89,10 +89,10 @@ def Comparison_of_models_Without_Case():
                     #axs[0,i].title.set_text(f'Phi {k*45}')
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'RTX, Case omitted ')
                     axs[0,i].grid(True)
-                #else:
-                    #axs[0,i].title.set_text(f'Phi 0')
-                    #axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Cuboid {(k+1)*10}, Case omitted')
-                    #axs[0,i].grid(True)
+                else:
+                    axs[0,i].title.set_text(f'Phi 0')
+                    axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Cuboid {(k+1)*10}, Case omitted')
+                    axs[0,i].grid(True)
             else:
                 axs[0,i].title.set_text(f'Phi {i*45}')
                 axs[0,i].plot(Angle_dict["combined gain list"][k][0][i])
@@ -109,7 +109,7 @@ def Comparison_of_models_Without_Case():
     #plt.ylabel('Gain')
     #plt.title('Phi gain comparison of generalized models') 
     fig.suptitle('Comparison of Phi and Theta, Case Omitted')         
-    fig.legend(bbox_to_anchor=(-3.0,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
+    fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True) 
     plt.show()
   
@@ -161,7 +161,7 @@ def Comparison_of_models_With_Case():
     #plt.title('Phi gain comparison of generalized models')
     plt.grid(True)
     fig.suptitle('Comparison of Phi and Theta Parameters') 
-    fig.legend(bbox_to_anchor=(-3.0,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
+    fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     #plt.show()
     return fig
 
@@ -209,25 +209,25 @@ def Comparison_of_models_s11():
     #plt.ylabel('Gain')
     #plt.title('Phi gain comparison of generalized models')
     fig.suptitle('Comparison of S1,1 Parameters') 
-    fig.legend(bbox_to_anchor=(-3.0,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
+    fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True)  
     #plt.show()  
     return fig
 
 
-@collection.plot_figure(only_build_this = False)
+@collection.plot_figure(only_build_this = True)
 def Comparison_Of_Port_S11_Med():
     S11MedCase_1 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_1.txt'), delimiter='\t', skiprows=1, unpack=True)
     S11MedCase_2 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_2.txt'), delimiter='\t', skiprows=1, unpack=True)
     S11MedCase_3 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_3.txt'), delimiter='\t', skiprows=1, unpack=True)
     S11MedCase_4 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_4.txt'), delimiter='\t', skiprows=1, unpack=True)
-    S11voxel = np.loadtxt(open('Data/Generalisering/s11/s11_Antenna_1mm_simulated.txt'), delimiter='\t', skiprows=1, unpack=True)
+    S11MedCase_5 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_5.txt'), delimiter='\t', skiprows=1, unpack=True)
     fig, ax = plt.subplots()   
-    ax.plot(S11MedCase_1[0], S11MedCase_1[1], label='Cuboid ver 10')
-    ax.plot(S11MedCase_2[0], S11MedCase_2[1], label='Cuboid ver 20')   
-    ax.plot(S11MedCase_3[0], S11MedCase_3[1], label='Cuboid ver 32')
-    ax.plot(S11MedCase_4[0], S11MedCase_4[1], label='RTX model')
-    ax.plot(S11voxel[0], S11voxel[1], label='Voxelised 1mm')  
+    #ax.plot(S11MedCase_1[0], S11MedCase_1[1], label='Cuboid ver 10')
+    #ax.plot(S11MedCase_2[0], S11MedCase_2[1], label='Cuboid ver 20')   
+    ax.plot(S11MedCase_3[0], S11MedCase_3[1], label='RTX')
+    ax.plot(S11MedCase_4[0], S11MedCase_4[1], label='Voxel 1mm')
+    ax.plot(S11MedCase_5[0], S11MedCase_5[1], label='Cuboid 32')    
     plt.xlabel('Frequency [MHz]')
     plt.ylabel('S1,1 [dB]')
     plt.title('Comparison of S1,1 Parameters')
@@ -254,5 +254,78 @@ def Comparison_Of_Port_S11_Uden():
     #fig.legend()
     fig.legend(bbox_to_anchor=(0.3,0.1),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True)
+    #plt.show()
+    return fig
+
+
+# @collection.plot_figure(only_build_this = True)
+
+# def Comparison_Of_32_And_RTX():
+#     with open('Data/Generalisering/dictionaries/uden_case.pkl', "rb") as pkl_to_load:
+#         Angle_dict = pickle.load(pkl_to_load)
+
+#     axs[0,i].title.set_text(f'Phi 0')
+#     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Cuboid ver 32')
+#     axs[0,i].grid(True)
+#     S11UdenCase_1 = np.loadtxt(open('Data/Generalisering/s11/S11_UdenCase_1.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     S11UdenCase_2 = np.loadtxt(open('Data/Generalisering/s11/S11_UdenCase_2.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     S11UdenCase_3 = np.loadtxt(open('Data/Generalisering/s11/S11_UdenCase_3.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     S11UdenCase_4 = np.loadtxt(open('Data/Generalisering/s11/S11_UdenCase_4.txt'), delimiter='\t', skiprows=1, unpack=True)
+#     fig, ax = plt.subplots()     
+#     ax.plot(S11UdenCase_1[0], S11UdenCase_1[1], label='Cuboid ver 10, Case Omitted')
+#     ax.plot(S11UdenCase_2[0], S11UdenCase_2[1], label='Cuboid ver 20, Case Omitted')   
+#     ax.plot(S11UdenCase_3[0], S11UdenCase_3[1], label='Cuboid ver 32, Case Omitted')
+#     ax.plot(S11UdenCase_4[0], S11UdenCase_4[1], label='RTX, Case Omitted')
+#     plt.xlabel('Frequency [MHz]')
+#     plt.ylabel('S1,1 [dB]')
+#     plt.title('Comparison of S1,1 Parameters, Case Omitted')
+#     fig.legend()
+#     fig.legend(bbox_to_anchor=(0.3,0.1),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
+#     plt.grid(True)
+#     plt.show()
+#     return fig
+
+
+@collection.plot_figure(only_build_this = False)
+def Comparison_of_32_RTX_Voxel():
+    fig, axs = plt.subplots(2,4)
+
+    with open('Data/Generalisering/dictionaries/med_case.pkl', "rb") as pkl_to_load:
+        Angle_dict = pickle.load(pkl_to_load)
+
+    #print(Angle_dict["combined gain list"].shape)
+
+    for i in range(4):
+        for k in range(2,5):
+            if i ==0:
+
+
+
+                if k == 2:
+                    axs[0,i].title.set_text(f'Phi 0')
+                    axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'RTX')
+                    axs[0,i].grid(True)
+                elif k == 3:
+                    axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Voxel')
+                    axs[0,i].grid(True)
+                else:
+                    axs[0,i].title.set_text(f'Phi 0')
+                    axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Cuboid')
+                    axs[0,i].grid(True)
+
+            else:
+                axs[0,i].title.set_text(f'Phi {i*45}')
+                axs[0,i].plot(Angle_dict["combined gain list"][k][0][i])
+                axs[0,i].grid(True)
+    for i in range(4):
+        for k in range(2,5):
+            axs[1,i].title.set_text(f'Theta {i*45}')
+            axs[1,i].plot(Angle_dict["combined gain list"][k][1][i])
+            axs[1,i].grid(True)
+
+
+    plt.grid(True)
+    fig.suptitle('Comparison of Phi and Theta Values') 
+    fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     #plt.show()
     return fig
