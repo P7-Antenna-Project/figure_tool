@@ -123,8 +123,8 @@ def costFunctionExample():
     # Plot the curve
     ax.plot(x, y,linewidth = 2)
     # ax.set_title('Cost Function')
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
+    ax.set_xlabel('S1,1 [dB]')
+    ax.set_ylabel('Error weight')
     ax.set_xlim(0, 17)
     ax.set_ylim(0, 8)
     ax.grid(True)
