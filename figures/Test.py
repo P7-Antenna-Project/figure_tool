@@ -47,7 +47,7 @@ def bandwidth_and_centre_frequency():
 
     return fig
 
-@collection.plot_figure(only_build_this=True)
+@collection.plot_figure(only_build_this=False)
 def bandwidth_and_centre_frequency_investigation():
     # Load data
     fig, ax = plt.subplots(1,2)
@@ -64,5 +64,9 @@ def bandwidth_and_centre_frequency_investigation():
 
     ax[1].scatter(wire_data["centre_frequency"],wire_data["bandwidth"] , label = "WIRE", s=1)
     ax[1].set_title("WIRE")
+    ax[0].set_xlabel("Centre frequency [MHz]")
+    ax[0].set_ylabel("Bandwidth [MHz]")
+    ax[1].set_xlabel("Centre frequency [MHz]")
+    ax[1].set_ylabel("Bandwidth [MHz]")
 
     return fig
