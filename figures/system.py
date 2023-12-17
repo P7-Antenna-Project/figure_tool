@@ -43,7 +43,7 @@ def S11_plot_for_parameterize():
 
     return fig
 
-@collection.plot_figure(only_build_this=False)
+@collection.plot_figure(only_build_this=False,width=.75, height=.75)
 def sigmoidWeightedLosses():
     fig, ax = plt.subplots(1, 1, figsize=(5, 3))
     # plot sigmoid function 2*sigmoid(-x)+2

@@ -204,7 +204,7 @@ def activationFunctions():
 
     plt.subplot(1, 3, 1) 
     plt.plot(x, sigmoid(x),linewidth=2)
-    # plt.title('Sigmoid Function')
+    plt.title('Sigmoid Function')
     ax[0].set_xlim(-5,5)
 
     #plt.ylabel('sigmoid(x)')
