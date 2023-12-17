@@ -43,7 +43,7 @@ def S11_plot_for_parameterize():
 
     return fig
 
-@collection.plot_figure(only_build_this=False)
+@collection.plot_figure(only_build_this=False, width=0.7, height=0.7)
 def sigmoidWeightedLosses():
     fig, ax = plt.subplots(1, 1, figsize=(5, 3))
     # plot sigmoid function 2*sigmoid(-x)+2
@@ -57,7 +57,7 @@ def sigmoidWeightedLosses():
     plt.grid()
     # make legend correct:
     plt.xlim(-5,10)
-    plt.legend(["f(x)","2 $\cdot$ f(-x)"])
+    plt.legend(["f(x)","2 $\cdot$ f(-x)"], loc='upper right', borderaxespad=0., bbox_to_anchor=(1.2, 1))
     # plt.legend("f(x)","2*f(-x)+2")
     
     plt.xlabel("x")
