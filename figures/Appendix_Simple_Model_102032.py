@@ -111,7 +111,7 @@ def Comparison_of_models_Without_Case():
     fig.suptitle('Comparison of Phi and Theta, Case Omitted')         
     fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True) 
-    plt.show()
+    #plt.show()
   
     return fig
 
@@ -160,7 +160,7 @@ def Comparison_of_models_With_Case():
     #plt.ylabel('Gain')
     #plt.title('Phi gain comparison of generalized models')
     plt.grid(True)
-    fig.suptitle('Comparison of Phi and Theta Parameters') 
+    fig.suptitle('Radiation Pattern') 
     fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     #plt.show()
     return fig
@@ -183,6 +183,7 @@ def Comparison_of_models_s11():
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Cuboid ver 32')
                     axs[0,i].grid(True)
 
+
                 elif k == 3:
                     #axs[0,i].title.set_text(f'Phi {k*45}')
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'RTX')
@@ -196,6 +197,7 @@ def Comparison_of_models_s11():
                 axs[0,i].title.set_text(f'Phi {i*45}')
                 axs[0,i].plot(Angle_dict["combined gain list"][k][0][i])
                 axs[0,i].grid(True)
+                
     for i in range(4):
         for k in range(4):
             axs[1,i].title.set_text(f'Theta {i*45}')
@@ -208,7 +210,7 @@ def Comparison_of_models_s11():
     #plt.xlabel('Degree')
     #plt.ylabel('Gain')
     #plt.title('Phi gain comparison of generalized models')
-    fig.suptitle('Comparison of S1,1 Parameters') 
+    fig.suptitle('S1,1 Parameters') 
     fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True)  
     #plt.show()  
@@ -230,7 +232,7 @@ def Comparison_Of_Port_S11_Med():
     ax.plot(S11MedCase_5[0], S11MedCase_5[1], label='Cuboid 32')    
     plt.xlabel('Frequency [MHz]')
     plt.ylabel('S1,1 [dB]')
-    plt.title('Comparison of S1,1 Parameters')
+    plt.title('S1,1 Parameters')
     fig.legend(bbox_to_anchor=(0.3,0.1),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True)
     #plt.show()
@@ -286,7 +288,7 @@ def Comparison_Of_Port_S11_Uden():
 #     return fig
 
 
-@collection.plot_figure(only_build_this = False)
+@collection.plot_figure(only_build_this = True)
 def Comparison_of_32_RTX_Voxel():
     fig, axs = plt.subplots(2,4)
 
@@ -305,6 +307,7 @@ def Comparison_of_32_RTX_Voxel():
                     axs[0,i].title.set_text(f'Phi 0')
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'RTX')
                     axs[0,i].grid(True)
+                    axs[0,i].set_xticks([180])
                 elif k == 3:
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Voxel')
                     axs[0,i].grid(True)
@@ -317,15 +320,19 @@ def Comparison_of_32_RTX_Voxel():
                 axs[0,i].title.set_text(f'Phi {i*45}')
                 axs[0,i].plot(Angle_dict["combined gain list"][k][0][i])
                 axs[0,i].grid(True)
+                axs[0,i].set_xticks([180])
     for i in range(4):
         for k in range(2,5):
             axs[1,i].title.set_text(f'Theta {i*45}')
             axs[1,i].plot(Angle_dict["combined gain list"][k][1][i])
             axs[1,i].grid(True)
+            axs[1,i].set_xticks([180])
 
 
     plt.grid(True)
-    fig.suptitle('Comparison of Phi and Theta Values') 
-    fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
+    fig.suptitle('Radiation Pattern')
+    plt.setp(axs[-1, :], xlabel='Degree')
+    plt.setp(axs[:, 0], ylabel='Gain [dBi]') 
+    fig.legend(bbox_to_anchor=(-3.25,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     #plt.show()
     return fig
