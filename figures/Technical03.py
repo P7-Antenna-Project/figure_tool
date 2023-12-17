@@ -186,7 +186,7 @@ def mutualCouplingDegrading_sParamsDiffPolari():
     return fig 
 
 
-@collection.plot_figure(only_build_this=True, width=1, height=0.5)
+@collection.plot_figure(only_build_this=False, width=1, height=0.5)
 def activationFunctions():   
     def sigmoid(x):
         return 1 / (1 + np.exp(-x))
@@ -204,7 +204,7 @@ def activationFunctions():
 
     plt.subplot(1, 3, 1) 
     plt.plot(x, sigmoid(x),linewidth=2)
-    plt.title('Sigmoid Function')
+    # plt.title('Sigmoid Function')
     ax[0].set_xlim(-5,5)
 
     #plt.ylabel('sigmoid(x)')

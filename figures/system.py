@@ -43,7 +43,7 @@ def S11_plot_for_parameterize():
 
     return fig
 
-@collection.plot_figure(only_build_this=False, width=0.7, height=0.7)
+@collection.plot_figure(only_build_this=False)
 def sigmoidWeightedLosses():
     fig, ax = plt.subplots(1, 1, figsize=(5, 3))
     # plot sigmoid function 2*sigmoid(-x)+2
@@ -57,10 +57,38 @@ def sigmoidWeightedLosses():
     plt.grid()
     # make legend correct:
     plt.xlim(-5,10)
-    plt.legend(["f(x)","2 $\cdot$ f(-x)"], loc='upper right', borderaxespad=0., bbox_to_anchor=(1.2, 1))
+    plt.legend(["f(x)","2 $\cdot$ f(-x)"])
     # plt.legend("f(x)","2*f(-x)+2")
     
     plt.xlabel("x")
     plt.ylabel("y")
     # plt.show()
+    return fig
+
+@collection.plot_figure(only_build_this=False,width=1, height=.75)
+def arbitraryS11Curve_discussion():
+    # Define the parameters
+   # Define the parameters
+    f_start = 1000  # Start frequency in MHz
+    f_stop = 2500  # Stop frequency in MHz
+    f_center = 1900  # Center frequency in MHz
+    bw = 100  # Bandwidth in MHz
+    points = 1001  # Number of points
+    s11_min = -30  # Minimum S11 in dB
+
+    # Generate the frequency array
+    frequencies = np.linspace(f_start, f_stop, points)
+
+    # Generate the S11 values
+    s11 = s11_min * np.exp(-((frequencies - f_center) / bw) ** 2)
+
+    # Plot the S11 curve
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.plot(frequencies, s11,linewidth = 2)
+    # ax.set_title('S11 Curve')
+    ax.set_xlabel('Frequency (MHz)')
+    ax.set_ylabel('S11 (dB)')
+    ax.set_xlim(f_start, f_stop)
+    ax.grid(True)
+    
     return fig
