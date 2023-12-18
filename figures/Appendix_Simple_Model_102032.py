@@ -98,12 +98,13 @@ def Comparison_of_models_Without_Case():
                 axs[0,i].title.set_text(f'Phi {i*45}')
                 axs[0,i].plot(Angle_dict["combined gain list"][k][0][i])
                 axs[0,i].grid(True)
+                axs[0,i].set_xticks([180])
     for i in range(4):
         for k in range(4):
             axs[1,i].title.set_text(f'Theta {i*45}')
             axs[1,i].plot(Angle_dict["combined gain list"][k][1][i])
             axs[1,i].grid(True)
-            axs[0,i].set_xticks([180])
+            axs[1,i].set_xticks([180])
 
                 
     #plt.title("Phi")
@@ -135,6 +136,7 @@ def Comparison_of_models_With_Case():
                     axs[0,i].title.set_text(f'Phi 0')
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Cuboid ver 32')
                     axs[0,i].grid(True)
+                    axs[0,i].set_xticks([180])
                 elif k == 3:
                     #axs[0,i].title.set_text(f'Phi {k*45}')
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'RTX')
@@ -148,13 +150,14 @@ def Comparison_of_models_With_Case():
                 axs[0,i].title.set_text(f'Phi {i*45}')
                 axs[0,i].plot(Angle_dict["combined gain list"][k][0][i])
                 axs[0,i].grid(True)
-                
+                axs[0,i].set_xticks([180])             
                 
     for i in range(4):
         for k in range(4):
             axs[1,i].title.set_text(f'Theta {i*45}')
             axs[1,i].plot(Angle_dict["combined gain list"][k][1][i])
             axs[1,i].grid(True)
+            axs[1,i].set_xticks([180])
             
         
 
@@ -165,7 +168,9 @@ def Comparison_of_models_With_Case():
     #plt.title('Phi gain comparison of generalized models')
     plt.grid(True)
     fig.suptitle('Radiation Pattern') 
-    fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
+    plt.setp(axs[-1, :], xlabel='Degree')
+    plt.setp(axs[:, 0], ylabel='Gain [dBi]')   
+    fig.legend(bbox_to_anchor=(-3.75,0.75),bbox_transform = plt.gca().transAxes, loc = 'lower right', fontsize='small' )
     #plt.show()
     return fig
 
@@ -228,7 +233,7 @@ def Comparison_of_models_s11():
     return fig
 
 
-@collection.plot_figure(only_build_this = False)
+@collection.plot_figure(only_build_this = True)
 def Comparison_Of_Port_S11_Med():
     S11MedCase_1 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_1.txt'), delimiter='\t', skiprows=1, unpack=True)
     S11MedCase_2 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_2.txt'), delimiter='\t', skiprows=1, unpack=True)
@@ -244,7 +249,7 @@ def Comparison_Of_Port_S11_Med():
     plt.xlabel('Frequency [MHz]')
     plt.ylabel('S1,1 [dB]')
     plt.title('S1,1 Parameters')
-    fig.legend(bbox_to_anchor=(0.3,0.1),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
+    fig.legend(bbox_to_anchor=(0.25,-0.025),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True)
     #plt.show()
 
