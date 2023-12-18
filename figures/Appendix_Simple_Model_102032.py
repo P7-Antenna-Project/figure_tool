@@ -60,8 +60,8 @@ S10_WC_NOW  = np.loadtxt(open('Data/Generalisering/old/Simple10_WC_NOW.txt'),  d
 S20_NOC_NOW = np.loadtxt(open('Data/Generalisering/old/Simple20_NOC_NOW.txt'), delimiter='\t', skiprows=1, unpack=True)
 S20_WC_NOW  = np.loadtxt(open('Data/Generalisering/old/Simple20_WC_NOW.txt'),  delimiter='\t', skiprows=1, unpack=True)
 
-
-
+phi_list = []
+theta_list = []
 
 
 #Angle_dict["combined gain list"][0][0][0] # [run id (10/20/30 kasser)][phi/theta][valgte grad][plads i array]
@@ -85,6 +85,7 @@ def Comparison_of_models_Without_Case():
                     #axs[0,i].title.set_text(f'Phi {k*45}')
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Cuboid 32, Case omitted')
                     axs[0,i].grid(True)
+                    axs[0,i].set_xticks([180])
                 elif k == 3:
                     #axs[0,i].title.set_text(f'Phi {k*45}')
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'RTX, Case omitted ')
@@ -102,14 +103,17 @@ def Comparison_of_models_Without_Case():
             axs[1,i].title.set_text(f'Theta {i*45}')
             axs[1,i].plot(Angle_dict["combined gain list"][k][1][i])
             axs[1,i].grid(True)
+            axs[0,i].set_xticks([180])
 
                 
     #plt.title("Phi")
     #plt.xlabel('Degree')
     #plt.ylabel('Gain')
     #plt.title('Phi gain comparison of generalized models') 
-    fig.suptitle('Comparison of Phi and Theta, Case Omitted')         
-    fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
+    fig.suptitle('Comparison of Phi and Theta, Case Omitted')  
+    plt.setp(axs[-1, :], xlabel='Degree')
+    plt.setp(axs[:, 0], ylabel='Gain [dBi]')        
+    fig.legend(bbox_to_anchor=(-2.95,0.1),bbox_transform = plt.gca().transAxes, loc = 'lower right', fontsize='small' )
     plt.grid(True) 
     #plt.show()
   
@@ -197,6 +201,7 @@ def Comparison_of_models_s11():
                 axs[0,i].title.set_text(f'Phi {i*45}')
                 axs[0,i].plot(Angle_dict["combined gain list"][k][0][i])
                 axs[0,i].grid(True)
+
                 
     for i in range(4):
         for k in range(4):
@@ -204,20 +209,26 @@ def Comparison_of_models_s11():
             axs[1,i].plot(Angle_dict["combined gain list"][k][1][i])
             axs[1,i].grid(True)
             
+    # print(np.mean((Angle_dict["combined gain list"][3][0][i]) - S11MedCase_5)**2))            
 
-                
+    
+
+
+
     #plt.title("Phi")
     #plt.xlabel('Degree')
     #plt.ylabel('Gain')
     #plt.title('Phi gain comparison of generalized models')
     fig.suptitle('S1,1 Parameters') 
+    
     fig.legend(bbox_to_anchor=(-3.5,0.25),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True)  
-    #plt.show()  
+    #plt.show()
+ 
     return fig
 
 
-@collection.plot_figure(only_build_this = True)
+@collection.plot_figure(only_build_this = False)
 def Comparison_Of_Port_S11_Med():
     S11MedCase_1 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_1.txt'), delimiter='\t', skiprows=1, unpack=True)
     S11MedCase_2 = np.loadtxt(open('Data/Generalisering/s11/S11_MedCase_2.txt'), delimiter='\t', skiprows=1, unpack=True)
@@ -236,6 +247,7 @@ def Comparison_Of_Port_S11_Med():
     fig.legend(bbox_to_anchor=(0.3,0.1),bbox_transform = plt.gca().transAxes, loc = 'lower right' )
     plt.grid(True)
     #plt.show()
+
     return fig
 
 
@@ -288,7 +300,7 @@ def Comparison_Of_Port_S11_Uden():
 #     return fig
 
 
-@collection.plot_figure(only_build_this = True)
+@collection.plot_figure(only_build_this = False)
 def Comparison_of_32_RTX_Voxel():
     fig, axs = plt.subplots(2,4)
 
@@ -296,7 +308,9 @@ def Comparison_of_32_RTX_Voxel():
         Angle_dict = pickle.load(pkl_to_load)
 
     #print(Angle_dict["combined gain list"].shape)
-
+    RTX_phi = []
+    voxel_phi = []
+    cuboid_phi = []
     for i in range(4):
         for k in range(2,5):
             if i ==0:
@@ -308,25 +322,60 @@ def Comparison_of_32_RTX_Voxel():
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'RTX')
                     axs[0,i].grid(True)
                     axs[0,i].set_xticks([180])
+                    # RTX_phi.append(Angle_dict['combined gain list'][2][0][i])
                 elif k == 3:
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Voxel')
                     axs[0,i].grid(True)
+                    # voxel_phi.append(Angle_dict['combined gain list'][3][0][i])
+                    
                 else:
                     axs[0,i].title.set_text(f'Phi 0')
                     axs[0,i].plot(Angle_dict["combined gain list"][k][0][i], label=f'Cuboid')
                     axs[0,i].grid(True)
+                    # cuboid_phi.append(Angle_dict['combined gain list'][4][0][i])
 
             else:
                 axs[0,i].title.set_text(f'Phi {i*45}')
                 axs[0,i].plot(Angle_dict["combined gain list"][k][0][i])
                 axs[0,i].grid(True)
                 axs[0,i].set_xticks([180])
+        RTX_phi.append(Angle_dict['combined gain list'][2][0][i])
+        voxel_phi.append(Angle_dict['combined gain list'][3][0][i])
+        cuboid_phi.append(Angle_dict['combined gain list'][4][0][i])
+ ########### start theta for MSE ##############################3
+    #RTX_theta= []
+    #voxel_theta = []
+    #cuboid_theta = []
+
     for i in range(4):
         for k in range(2,5):
             axs[1,i].title.set_text(f'Theta {i*45}')
             axs[1,i].plot(Angle_dict["combined gain list"][k][1][i])
             axs[1,i].grid(True)
             axs[1,i].set_xticks([180])
+############ Append for MSE ##############################
+        #RTX_theta.append(Angle_dict['combined gain list'][2][1][i])
+        #voxel_theta.append(Angle_dict['combined gain list'][3][1][i])
+        #cuboid_theta.append(Angle_dict['combined gain list'][4][1][i])
+
+
+######################## MSE ##########################################
+    #MSE_voxel_theta = [np.mean((RTX_theta[angle]-voxel_theta[angle])**2) for angle in range(4)]
+    #MSE_cuboid_theta =[np.mean((RTX_theta[angle]-cuboid_theta[angle])**2) for angle in range(4)]
+    #print(f'voxel MSE theta 0, 45, 90, 135')
+    #print(MSE_voxel_theta)
+    #print(f'Cuboid MSE theta 0, 45, 90, 135')
+    #print(MSE_cuboid_theta)
+
+    #MSE_voxel_phi = [np.mean((RTX_phi[angle]-voxel_phi[angle])**2) for angle in range(4)]
+    #MSE_cuboid_phi =[np.mean((RTX_phi[angle]-cuboid_phi[angle])**2) for angle in range(4)]
+    #print(f'voxel MSE phi 0, 45, 90, 135')
+    #print(MSE_voxel_phi)
+    #print(f'Cuboid MSE phi 0, 45, 90, 135')
+    #print(MSE_cuboid_phi)
+    # print(Angle_dict['combined gain list'][2][1][2])
+    # print(np.asarray(RTX_theta).shape)
+    # print(np.asarray(RTX_theta)[2])
 
 
     plt.grid(True)
