@@ -7,47 +7,54 @@ from matplotlib.ticker import FuncFormatter
 
 collection = FigureCollection("Test")
 
-@collection.plot_figure(only_build_this=False)
+@collection.plot_figure(only_build_this=True)
 def plot_centre_frequency():
     # Load data
-    # data = np.load("data/centre_frequency.npy")
-    straight_frequency = np.linspace(1000,2500,1500)
+    FC = np.load("Data/Test_data/Wire_testing_inverse2_pred_FC.npy")
+    straight_frequency = np.linspace(1000, 2500, 31, endpoint=True)
 
     
     fig = plt.figure()
     ax = fig.add_subplot(111)
     # Upper bound
-    ax.plot(straight_frequency, straight_frequency+0.05*straight_frequency, color = "r", linestyle = "--")
+    ax.plot(straight_frequency, straight_frequency+0.05*straight_frequency, color = "g", linestyle = "--")
     # Lower bound
-    ax.plot(straight_frequency, straight_frequency-0.05*straight_frequency, color = "r", linestyle = "--")
-
-
-
+    ax.plot(straight_frequency, straight_frequency-0.05*straight_frequency, color = "g", linestyle = "--", label = r"5% error bound")
+    # Centre frequency
+    ax.plot(straight_frequency, FC[:31], "o",color = "b", label= "BW: 50" , markersize=4)
+    ax.plot(straight_frequency, FC[31:],'o' , color = "r", label = "BW: 100", markersize=4)
+    ax.set_xlabel("Centre frequency [MHz]")
+    ax.set_ylabel("Achieved centre frequency [MHz]")
+    plt.grid(True)
+    plt.legend()
+    # plt.show()
 
     return fig
 
-@collection.plot_figure(only_build_this=False)
+@collection.plot_figure(only_build_this=True)
 def bandwidth_and_centre_frequency():
     # Load data
-    # data = np.load("data/BW_freq.npy")
-    BW_fifty = np.ones(1500)*50
-    BW_hundred = np.ones(1500)*100
-
+    tested_FC = np.linspace(100, 2500, 31, endpoint=True)
+    BW_achieved = np.load("Data/Test_data/Wire_testing_inverse2_pred_BW.npy")
     
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    # Fifty bandwidth line
-    ax.plot(BW_fifty, linestyle = "--", label = "50 MHz bandwidth")
-    # Lower bound
-    ax.plot(BW_hundred, linestyle = "--", label = "100 MHz bandwidth")
+    fig, axs = plt.subplots(2)
+    # BW: 50
+    axs[0].axhline(50, color='b', linestyle='--', label="50 MHz bandwidth")
+    axs[0].plot(tested_FC, BW_achieved[:31], 'o', label="Achieved bandwidth", color='b', markersize=4)
+    axs[0].grid(True)
+    axs[0].legend()
 
+    # BW: 100
+    axs[1].axhline(100, color='r', linestyle='--', label="100 MHz bandwidth")
+    axs[1].plot(tested_FC, BW_achieved[31:], 'o', label="Achieved bandwidth", color='r', markersize=4)
+    axs[1].grid(True)
+    axs[1].legend()
 
-
-    #plt.show()
+    # plt.show()
 
     return fig
 
-@collection.plot_figure(only_build_this=False)
+@collection.plot_figure(only_build_this=True)
 def bandwidth_and_centre_frequency_investigation():
     # Load data
     fig, ax = plt.subplots(1,2)
