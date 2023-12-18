@@ -133,10 +133,10 @@ def costFunctionExample():
     
     
 @collection.plot_figure(only_build_this=False)
-def s11_plot():
+def wire_verification_plot():
    # load .txt file:
     skiprows = 2
-    data = np.loadtxt("Data/s11_verification.txt", skiprows=skiprows)
+    data = np.loadtxt("Data/wire_verification.txt", skiprows=skiprows)
     
     fig, ax = plt.subplots(figsize=(8, 4))
     ax.plot(data[:,0],data[:,1],linewidth = 2)
@@ -153,6 +153,31 @@ def s11_plot():
     ax.text(1900+350, -10, "1959 MHz",horizontalalignment='right',verticalalignment='bottom')
     ax.set_xlim(500,3000)
     ax.set_ylim(-20,0)    
+    ax.grid(True)
+    # plt.show()
+    return fig
+
+@collection.plot_figure(only_build_this=False)
+def MIFA_verification_plot():
+   # load .txt file:
+    skiprows = 2
+    data = np.loadtxt("Data/MIFA_verification.txt", skiprows=skiprows)
+    
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.plot(data[:,0],data[:,1],linewidth = 2)
+    # ax.set_title('S11 Curve')
+    ax.set_xlabel('Frequency [MHz]')
+    ax.set_ylabel('S11 [dB]')
+
+    ax.plot(2412*np.ones_like([-10]), [-20.09], marker='o', markersize=5, color="black")
+    ax.plot((2345)*np.ones_like([-10]), [-10], marker='o', markersize=5, color="black")
+    ax.plot((2489)*np.ones_like([-10]), [-10], marker='o', markersize=5, color="black")
+    #add text to the markers:
+    ax.text(2412, -22, "2412 MHz",horizontalalignment='center',verticalalignment='bottom')
+    ax.text(2345-100, -10, "2345 MHz",horizontalalignment='right',verticalalignment='bottom')
+    ax.text(2489+350, -10, "2489 MHz",horizontalalignment='right',verticalalignment='bottom')
+    ax.set_xlim(500,3000)
+    ax.set_ylim(-25,0)    
     ax.grid(True)
     # plt.show()
     return fig
