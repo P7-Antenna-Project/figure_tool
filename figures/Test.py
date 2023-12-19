@@ -42,12 +42,16 @@ def WIRE_bandwidth_and_centre_frequency():
     axs[0].axhline(50, color='b', linestyle='--', label="50 MHz bandwidth")
     axs[0].plot(tested_FC, BW_achieved[:31], 'o', label="Achieved bandwidth", color='b', markersize=4)
     axs[0].grid(True)
+    axs[0].set_xlabel("Centre frequency [MHz]")
+    axs[0].set_ylabel("Bandwidth [MHz]")
     axs[0].legend()
 
     # BW: 100
     axs[1].axhline(100, color='r', linestyle='--', label="100 MHz bandwidth")
     axs[1].plot(tested_FC, BW_achieved[31:], 'o', label="Achieved bandwidth", color='r', markersize=4)
     axs[1].grid(True)
+    axs[1].set_xlabel("Centre frequency [MHz]")
+    axs[1].set_ylabel("Bandwidth [MHz]")
     axs[1].legend()
 
     # plt.show()
@@ -90,12 +94,16 @@ def MIFA_bandwidth_and_centre_frequency():
     axs[0].axhline(50, color='b', linestyle='--', label="50 MHz bandwidth")
     axs[0].plot(tested_FC, BW_achieved[:31], 'o', label="Achieved bandwidth", color='b', markersize=4)
     axs[0].grid(True)
+    axs[0].set_xlabel("Centre frequency [MHz]")
+    axs[0].set_ylabel("Bandwidth [MHz]")
     axs[0].legend()
 
     # BW: 100
     axs[1].axhline(100, color='r', linestyle='--', label="100 MHz bandwidth")
     axs[1].plot(tested_FC, BW_achieved[31:], 'o', label="Achieved bandwidth", color='r', markersize=4)
     axs[1].grid(True)
+    axs[1].set_xlabel("Centre frequency [MHz]")
+    axs[1].set_ylabel("Bandwidth [MHz]")
     axs[1].legend()
 
     # plt.show()
